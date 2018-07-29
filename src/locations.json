@@ -1,0 +1,44 @@
+[
+	{
+		"id": "1",
+		"name": "Kawalerka Cafe",
+		"address": "Benedykta Polaka 12",
+		"lat": 51.111408,
+		"lng": 17.054928
+	},
+	{
+		"id": "2",
+		"name": "Cherubinowy Wedrowiec",
+		"address": "Plac Nankiera 17a",
+		"lat": 51.113255,
+		"lng": 17.036509
+	},
+	{
+		"id": "3",
+		"name": "Baszta",
+		"address": "Krainskiego 14",
+		"lat": 51.111932,
+		"lng": 17.040221
+	},
+	{
+		"id": "4",
+		"name": "Targowa Cafe",
+		"address": "Piaskowa 17",
+		"lat": 51.1125496,
+		"lng": 17.0386351
+	},
+	{
+		"id": "5",
+		"name": "Cafe Rownik",
+		"address": "Jednosci Narodowej 47",
+		"lat": 51.1182376,
+		"lng": 17.0373128
+	},
+	{
+		"id": "6",
+		"name": "Cocofli",
+		"address": "Pawla Wlodkowica 9",
+		"lat": 51.108216,
+		"lng": 17.0224463
+	}
+]

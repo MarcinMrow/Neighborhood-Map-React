@@ -1,0 +1,88 @@
+import React, { Component } from 'react';
+import {Map, InfoWindow, Marker, GoogleApiWrapper, withScriptjs} from 'google-maps-react';
+
+export class MapContainer extends React.Component {
+
+  state = {
+    showingInfoWindow: false,
+    activeMarker: {},
+    selectedPlace: {},
+  };
+
+  onMarkerClick = (props, marker, e) =>
+    this.setState({
+      selectedPlace: props,
+      activeMarker: marker,
+      showingInfoWindow: true
+  });
+
+  onMapClicked = (props) => {
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker: null
+      })
+    }
+  };
+
+  render() {
+
+    const { cafe, locations, actualMarker } = this.props;
+    
+    const style = {
+      width: '100%',
+      height: '100%'
+    }
+
+    const markers = this.props.locations.map( location => <Marker 
+      key={location.key}
+      cafe={cafe}
+      location={{lat: cafe.lat, lng: cafe.lng }}
+      />)
+
+    return (
+      <Map 
+        cafe={this.props.cafe }
+        google={this.props.google} 
+        zoom={14}
+        initialCenter={{
+          lat: 51.1079,
+          lng: 17.0385
+        }}
+        onClick={this.onMapClicked}
+        style={style}
+      >
+        
+        {/* display markers*/}
+        {locations.map(location =>
+          <Marker 
+            position={this.props.location}
+            key={location.key}
+            name={location.name}
+            lat={location.lat}
+            lng={location.lng}
+            address={location.address}
+            onClick={this.onMarkerClick}
+          />
+        )}
+        
+        <InfoWindow
+          onOpen={this.windowHasOpened} 
+          onClose={this.onInfoWindowClose}
+          marker={this.state.activeMarker}
+          visible={this.state.showingInfoWindow}>
+            <div>
+              <h1>{this.state.selectedPlace.name}</h1>
+            </div>
+        </InfoWindow>
+        
+        {markers}
+
+      </Map>
+    );
+  }
+}
+ 
+export default GoogleApiWrapper({
+  apiKey: ('AIzaSyCZgCuxKRu85jYhwg4H9JNCYKl7URtbU8w')
+})(MapContainer)
