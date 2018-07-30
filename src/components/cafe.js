@@ -9,6 +9,7 @@ export class Cafe extends React.Component {
     	cafes: [],
     	value: '',
     	title: '',
+
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -52,7 +53,7 @@ export class Cafe extends React.Component {
 		
 
 		return (
-			
+
 			<div className="cafe" 
 				value={this.state.value}
 				onClick={this.handleClick}>
@@ -61,6 +62,7 @@ export class Cafe extends React.Component {
 					{title}	
 				</div>
 			</div>
+			
 		);
 	}
 }

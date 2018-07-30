@@ -29,20 +29,24 @@ export class MapContainer extends React.Component {
 
     const { cafe, locations, actualMarker } = this.props;
     
+    console.log(actualMarker);
+    console.log(locations);
+
     const style = {
       width: '100%',
       height: '100%'
     }
 
+    // check this
     const markers = this.props.locations.map( location => <Marker 
-      key={location.key}
+      key={location.id}
       cafe={cafe}
-      location={{lat: cafe.lat, lng: cafe.lng }}
+      location={{lat: location.lat, lng: location.lng }}
       />)
 
     return (
       <Map 
-        cafe={this.props.cafe }
+        cafe={this.props.cafe}
         google={this.props.google} 
         zoom={14}
         initialCenter={{
@@ -56,8 +60,8 @@ export class MapContainer extends React.Component {
         {/* display markers*/}
         {locations.map(location =>
           <Marker 
-            position={this.props.location}
-            key={location.key}
+            position={{lat: location.lat, lng: location.lng}}
+            key={location.id}
             name={location.name}
             lat={location.lat}
             lng={location.lng}
@@ -73,6 +77,7 @@ export class MapContainer extends React.Component {
           visible={this.state.showingInfoWindow}>
             <div>
               <h1>{this.state.selectedPlace.name}</h1>
+              <h2>{this.state.selectedPlace.address}</h2>
             </div>
         </InfoWindow>
         

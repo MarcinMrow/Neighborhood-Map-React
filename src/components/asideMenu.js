@@ -25,11 +25,11 @@ export class Menu extends React.Component {
 	}
 
 	//
-  handleSearch = (e) => {
+  handleSearch = (event) => {
     
     this.setState({
-      search: e.target.value,
-      cafes: this.state.allCafes.filter((cafe) => new RegExp(e.target.value, "i").exec(cafe.name))
+      search: event.target.value,
+      cafes: this.state.allCafes.filter((cafe) => new RegExp(event.target.value, "i").exec(cafe.name))
     });
   }
 
@@ -42,7 +42,7 @@ export class Menu extends React.Component {
 
 	render() {
 		/*const title = this.props.cafe.name + " - " + this.props.cafe.address;*/
-		//const title = this.props.cafe.name;
+		// const title = this.props.cafe.name;
 		/*
 		const style = {
 		 	backgroundImage: `url('${this.props.cafe.imageUrl}')`
@@ -56,6 +56,8 @@ export class Menu extends React.Component {
         lng: this.state.selectedCafe.lng
       }
     }
+
+
 
 		return (
 			<div className="main">
@@ -71,12 +73,14 @@ export class Menu extends React.Component {
             
         	{ // test
          	this.state.cafes.map((cafe) => {
+         		// console.log('cafe');
           	return <Cafe 
               key={cafe.name} 
               cafe={cafe} 
               selectCafe={this.selectCafe} 
             />
-          })}
+          })
+          }
         </div>
 
       </div>

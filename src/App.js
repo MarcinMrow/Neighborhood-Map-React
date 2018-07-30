@@ -26,6 +26,7 @@ export class App extends Component {
     selectedCafe: null, //
     actualMarker: '',
     filterLocations: [],
+    value: ''
   };
 
 
@@ -36,13 +37,15 @@ export class App extends Component {
     fetch(url) // ajax
       .then(response => response.json())
       .then((data) => {
+        // console.log(data)
         this.setState({
-          cafes: data,
+          // cafes: data,
           allCafes: data,
-          selectedPlace: data, //
+          // selectedPlace: data, //
         });
       })
   }
+
 
 
   render() {
@@ -62,18 +65,35 @@ export class App extends Component {
       }
     }
 
+    let mylocations;
+    let locationsValue = false
+
+    if (this.state.allCafes !== undefined 
+      && this.state.allCafes !== null
+      && this.state.allCafes.length > 0) { 
+        mylocations = this.state.allCafes
+        locationsValue = true
+      }
+
+    
     return (
       
       <div className="app">
         
-        <Menu 
+        { //(console.log('where is my cafes list')) &&
+          (<Menu 
+            // ??
 
-        />
-         
-        <MapContainer
-          actualMarker={this.state.actualMarker}
-          locations={this.state.filterLocations}
-        /> 
+          />)
+        }
+              
+        { (locationsValue) && 
+          (<MapContainer
+            // markers={this.state.markers}
+            actualMarker={this.state.actualMarker}
+            locations={mylocations}
+          />)
+        } 
 
       </div>
     );
