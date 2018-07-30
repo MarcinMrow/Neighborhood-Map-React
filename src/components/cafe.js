@@ -50,6 +50,8 @@ export class Cafe extends React.Component {
 		 	backgroundImage: `url('${this.props.cafe.imageUrl}')`
 		}; 
 		*/
+		// const cafe = this.props.cafe;
+
 		
 
 		return (

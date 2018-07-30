@@ -58,9 +58,17 @@ export class Menu extends React.Component {
     }
 
 
-
 		return (
 			<div className="main">
+
+        {/*
+        <nav id="menu" className="toggle-menu" onClick={this.toggleList}>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M2 6h20v3H2zm0 5h20v3H2zm0 5h20v3H2z"></path>
+          </svg>
+        </nav>
+        */}
+
         <div className="search">
           <input
             type="text"
@@ -77,7 +85,7 @@ export class Menu extends React.Component {
           	return <Cafe 
               key={cafe.name} 
               cafe={cafe} 
-              selectCafe={this.selectCafe} 
+              selectCafe={this.selectCafe}
             />
           })
           }

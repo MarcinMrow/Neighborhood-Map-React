@@ -15,19 +15,23 @@ import Menu from "./components/asideMenu";
 
 export class App extends Component {
   
-  state = {
-    center: {},
-    showingInfoWindow: false,
-    activeMarker: {},
-    // activeMarker: [],
-    selectedPlace: {},
-    cafes: [], //
-    allCafes: [], //
-    selectedCafe: null, //
-    actualMarker: '',
-    filterLocations: [],
-    value: ''
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      center: {},
+      showingInfoWindow: false,
+      activeMarker: {},
+      // activeMarker: [],
+      selectedPlace: {},
+      cafes: [], //
+      allCafes: [], //
+      selectedCafe: null, //
+      actualMarker: '',
+      filterLocations: [],
+      value: '',
+      name: []
+    };
+  }
 
 
   // test
@@ -49,12 +53,12 @@ export class App extends Component {
 
 
   render() {
-
+    /*
     // test
     const cafes = {
       lat: this.state.lat, 
       lng: this.state.lng 
-    }
+    }*/
 
     let center;
     // test
@@ -75,17 +79,30 @@ export class App extends Component {
         locationsValue = true
       }
 
-    
+    const allCafes = this.props.allCafes;
+    const cafes = this.props.cafes;
+    const updateList = this.props.updateList;
+    //
+    console.log(this.props);
+
     return (
       
       <div className="app">
         
         { //(console.log('where is my cafes list')) &&
-          (<Menu 
-            // ??
 
-          />)
+          <Menu 
+            // ??
+            cafes={this.state.cafes}
+            locations={this.state.locations}
+            allCafes={this.state.allCafes}
+            title={this.state.title}
+            cafe={this.state.cafe}
+            mylocations={this.state.mylocations}
+
+          />
         }
+        
               
         { (locationsValue) && 
           (<MapContainer
