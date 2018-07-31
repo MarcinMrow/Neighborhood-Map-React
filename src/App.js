@@ -10,28 +10,30 @@ import Cafe from './components/cafe';
 
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 import MapContainer from './components/Map';
-import Menu from "./components/asideMenu";
+import AsideMenu from "./components/AsideMenu";
 
 
 export class App extends Component {
   
-  constructor(props) {
-    super(props);
-    this.state = {
-      center: {},
-      showingInfoWindow: false,
-      activeMarker: {},
-      // activeMarker: [],
-      selectedPlace: {},
-      cafes: [], //
-      allCafes: [], //
-      selectedCafe: null, //
-      actualMarker: '',
-      filterLocations: [],
-      value: '',
-      name: []
-    };
-  }
+  //constructor(props) {
+  //  super(props);
+  //  this.
+
+  state = {
+    // center: {},
+    showingInfoWindow: false,
+    activeMarker: {},
+    // activeMarker: [],
+    selectedPlace: {},
+    cafes: [], //
+    allCafes: [], //
+    selectedCafe: null, //
+    // actualMarker: '',
+    // value: '',
+    name: [],
+    displayCafes: [], //
+  };
+  //}
 
 
   // test
@@ -43,31 +45,14 @@ export class App extends Component {
       .then((data) => {
         // console.log(data)
         this.setState({
-          // cafes: data,
+          cafes: data, //
           allCafes: data,
-          // selectedPlace: data, //
+          selectedPlace: data, //
         });
       })
   }
 
-
-
   render() {
-    /*
-    // test
-    const cafes = {
-      lat: this.state.lat, 
-      lng: this.state.lng 
-    }*/
-
-    let center;
-    // test
-    if (this.state.selectCafe) {
-      center = {
-        lat: this.state.selectedCafe.lat,
-        lng: this.state.selectedCafe.lng
-      }
-    }
 
     let mylocations;
     let locationsValue = false
@@ -79,32 +64,29 @@ export class App extends Component {
         locationsValue = true
       }
 
-    const allCafes = this.props.allCafes;
-    const cafes = this.props.cafes;
-    const updateList = this.props.updateList;
-    //
-    console.log(this.props);
+    const cafes = this.state;
+    const updateList = this.state;
 
+    // console.log(this.state);
+    
     return (
       
       <div className="app">
         
-        { //(console.log('where is my cafes list')) &&
-
-          <Menu 
-            // ??
-            cafes={this.state.cafes}
-            locations={this.state.locations}
+        { 
+          <AsideMenu             
+            // cafes={this.state.cafes}
+            // locations={this.state.locations}
             allCafes={this.state.allCafes}
-            title={this.state.title}
-            cafe={this.state.cafe}
-            mylocations={this.state.mylocations}
 
+            //title={this.state.title}
+            //cafe={this.state.cafe}
+            //mylocations={this.state.mylocations}
           />
         }
         
-              
-        { (locationsValue) && 
+        { 
+          (locationsValue) && 
           (<MapContainer
             // markers={this.state.markers}
             actualMarker={this.state.actualMarker}

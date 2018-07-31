@@ -1,37 +1,17 @@
 import React from "react";
 import Cafe from "./cafe";
 
-export class Menu extends React.Component {
-	
-	constructor(props) {
-    super(props);
-    this.state = {
-    	cafes: [],
-    	value: '',
-    	title: '',
-    	allCafes: [],
-    };
+export class AsideMenu extends React.Component {
 
-    this.handleClick = this.handleClick.bind(this);
-  }
-/*
-	handleClick = () => {
-		this.props.selectCafe(this.props.cafe);
-	}*/
-
-	handleClick = (event) => {
-		this.setState({value: event.target.value});
-		console.log('click');
-	}
-
-	//
-  handleSearch = (event) => {
-    
-    this.setState({
-      search: event.target.value,
-      cafes: this.state.allCafes.filter((cafe) => new RegExp(event.target.value, "i").exec(cafe.name))
-    });
-  }
+  state = {
+    // cafe: [],
+    // cafes: [],
+  	value: '',
+  	// title: '',
+   	allCafes: [],
+    selectedCafe: null,
+    search: "",
+  };
 
   selectCafe = (cafe) => {
     console.log(cafe);
@@ -40,23 +20,31 @@ export class Menu extends React.Component {
     })
   }
 
+	//
+  handleSearch = (e) => {  
+    this.setState({
+      search: e.target.value,
+      cafes: this.state.allCafes.filter((cafe) => new RegExp(e.target.value, "i").exec(cafe.name))
+    });
+  }
+
 	render() {
-		/*const title = this.props.cafe.name + " - " + this.props.cafe.address;*/
-		// const title = this.props.cafe.name;
-		/*
-		const style = {
-		 	backgroundImage: `url('${this.props.cafe.imageUrl}')`
-		}; 
-		*/
-		let center;
+    const { allCafes, title, cafe, mylocations } = this.props;
+    console.log('AsideMenu reads props ',allCafes);
+
     // test
-    if (this.state.selectCafe) {
+    let center = {
+      lat: 51.1079,
+      lng: 17.0385
+    }
+    if (this.state.selectedCafe) {
       center = {
         lat: this.state.selectedCafe.lat,
         lng: this.state.selectedCafe.lng
       }
     }
 
+    const searchCafes = this.props.searchCafes
 
 		return (
 			<div className="main">
@@ -74,26 +62,56 @@ export class Menu extends React.Component {
             type="text"
             placeholder="Search..."
             value={this.state.search}
-            onChange={this.handleSearch} />
+            onChange={this.handleSearch}
+          />
         </div>
           
         <div className="cafes">
-            
-        	{ // test
-         	this.state.cafes.map((cafe) => {
-         		// console.log('cafe');
-          	return <Cafe 
-              key={cafe.name} 
-              cafe={cafe} 
-              selectCafe={this.selectCafe}
-            />
-          })
+        
+          {
+          (allCafes !== undefined && allCafes !== null && allCafes.length > 0 ) && (
+            <ul>
+              { allCafes.map((cafe, index) => {
+                // console.log('cafe');
+                return <Cafe 
+                  key={cafe.name} 
+                  cafe={cafe} 
+                  selectCafe={this.selectCafe}
+
+                  />
+                }
+              )}
+            </ul>)
           }
         </div>
-
       </div>
 		);
 	}
 }
 
-export default Menu;
+export default AsideMenu;
+
+/*
+ // test
+          /*this.state.cafes.map((cafe) => {
+            // console.log('cafe');
+            return <Cafe 
+              key={cafe.name} 
+              cafe={cafe} 
+              selectCafe={this.selectCafe}
+            />
+          })*/
+         
+/*
+{
+            (allCafes !== undefined && allCafes !== null && allCafes.length > 0 ) && (
+              <ul>
+                { allCafes.map((cafe, index) => (
+                  <li key={index}>
+                    {cafe.name }
+                  </li>
+                  )
+                )}
+              </ul>)
+          }
+*/

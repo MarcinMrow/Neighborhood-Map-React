@@ -7,6 +7,7 @@ export class MapContainer extends React.Component {
     showingInfoWindow: false,
     activeMarker: {},
     selectedPlace: {},
+    // selectedCafe: null //
   };
 
   onMarkerClick = (props, marker, e) =>
@@ -28,8 +29,7 @@ export class MapContainer extends React.Component {
   render() {
 
     const { cafe, locations, actualMarker } = this.props;
-    
-    console.log(actualMarker);
+
     console.log(locations);
 
     const style = {
@@ -67,6 +67,7 @@ export class MapContainer extends React.Component {
             lng={location.lng}
             address={location.address}
             onClick={this.onMarkerClick}
+            selectedPlace={location === this.state.selectedPlace} //
           />
         )}
         
