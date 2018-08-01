@@ -44,6 +44,9 @@ export class MapContainer extends React.Component {
       location={{lat: location.lat, lng: location.lng }}
       />)
 
+    const handleSearch = this.props.handleSearch;
+
+
     return (
       <Map 
         cafe={this.props.cafe}
@@ -55,6 +58,7 @@ export class MapContainer extends React.Component {
         }}
         onClick={this.onMapClicked}
         style={style}
+        handleSearch={this.state.handleSearch} //
       >
         
         {/* display markers*/}

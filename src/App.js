@@ -11,6 +11,8 @@ import Cafe from './components/cafe';
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 import MapContainer from './components/Map';
 import AsideMenu from "./components/AsideMenu";
+import FilteredList from "./components/FilteredList";
+import List from "./components/List";
 
 
 export class App extends Component {
@@ -25,16 +27,17 @@ export class App extends Component {
     activeMarker: {},
     // activeMarker: [],
     selectedPlace: {},
-    cafes: [], //
+    //cafes: [], //
     allCafes: [], //
     selectedCafe: null, //
     // actualMarker: '',
     // value: '',
     name: [],
-    displayCafes: [], //
+    search: "",
+    //handleSearch: {},
+    filterList: [],   
   };
   //}
-
 
   // test
   componentDidMount() {
@@ -45,7 +48,7 @@ export class App extends Component {
       .then((data) => {
         // console.log(data)
         this.setState({
-          cafes: data, //
+          //cafes: data, //
           allCafes: data,
           selectedPlace: data, //
         });
@@ -53,6 +56,17 @@ export class App extends Component {
   }
 
   render() {
+    let center = {
+    lat: 48.8566,
+    lng: 2.3522
+    }
+
+    if (this.state.selectedFlat) {
+      center = {
+        lat: this.state.selectedFlat.lat,
+        lng: this.state.selectedFlat.lng
+      }
+    }
 
     let mylocations;
     let locationsValue = false
@@ -65,24 +79,26 @@ export class App extends Component {
       }
 
     const cafes = this.state;
-    const updateList = this.state;
-
-    // console.log(this.state);
     
     return (
       
       <div className="app">
-        
-        { 
-          <AsideMenu             
-            // cafes={this.state.cafes}
-            // locations={this.state.locations}
-            allCafes={this.state.allCafes}
 
+        <FilteredList 
+          allCafes={this.state.allCafes}
+          filterList={this.state.filterList}
+          filterCafes={this.state.filterCafes}
+
+        />
+
+        { /*
+          <AsideMenu             
+            allCafes={this.state.allCafes}
             //title={this.state.title}
             //cafe={this.state.cafe}
-            //mylocations={this.state.mylocations}
+            //mylocations={this.state.mylocations}          
           />
+          */
         }
         
         { 
@@ -91,6 +107,7 @@ export class App extends Component {
             // markers={this.state.markers}
             actualMarker={this.state.actualMarker}
             locations={mylocations}
+            // handleSearch={this.state.handleSearch}
           />)
         } 
 

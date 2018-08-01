@@ -2,35 +2,39 @@ import React from "react";
 import Cafe from "./cafe";
 
 export class AsideMenu extends React.Component {
-
+  // exported
   state = {
-    // cafe: [],
-    // cafes: [],
   	value: '',
-  	// title: '',
    	allCafes: [],
     selectedCafe: null,
     search: "",
   };
-
+  // exported
   selectCafe = (cafe) => {
     console.log(cafe);
     this.setState({
       selectedCafe: cafe
     })
   }
-
-	//
-  handleSearch = (e) => {  
+/*
+  //
+  handleSearch = (event) => {  
     this.setState({
-      search: e.target.value,
-      cafes: this.state.allCafes.filter((cafe) => new RegExp(e.target.value, "i").exec(cafe.name))
+      search: event.target.value,
+      cafes: this.state.allCafes.filter((cafe) => new RegExp(event.target.value, "i").exec(cafe.name))
+    });
+  }*/
+
+  handleSearch = (event) => {  
+    this.setState({
+      search: event.target.value,
+      cafes: this.state.allCafes.filter((cafe) => new RegExp(event.target.value, "i").exec(cafe.name))
     });
   }
 
 	render() {
     const { allCafes, title, cafe, mylocations } = this.props;
-    console.log('AsideMenu reads props ',allCafes);
+    // console.log('AsideMenu reads props ',allCafes);
 
     // test
     let center = {
@@ -44,8 +48,6 @@ export class AsideMenu extends React.Component {
       }
     }
 
-    const searchCafes = this.props.searchCafes
-
 		return (
 			<div className="main">
 
@@ -57,6 +59,8 @@ export class AsideMenu extends React.Component {
         </nav>
         */}
 
+        {
+        /*
         <div className="search">
           <input
             type="text"
@@ -65,9 +69,12 @@ export class AsideMenu extends React.Component {
             onChange={this.handleSearch}
           />
         </div>
-          
-        <div className="cafes">
+        */
+        }
         
+        {
+        /*         
+        <div className="cafes">
           {
           (allCafes !== undefined && allCafes !== null && allCafes.length > 0 ) && (
             <ul>
@@ -78,12 +85,14 @@ export class AsideMenu extends React.Component {
                   cafe={cafe} 
                   selectCafe={this.selectCafe}
 
-                  />
-                }
+                />
+              }
               )}
             </ul>)
           }
         </div>
+        */
+        }
       </div>
 		);
 	}
