@@ -8,6 +8,7 @@ export class MapContainer extends React.Component {
     activeMarker: {},
     selectedPlace: {},
     // selectedCafe: null //
+    //markers: []
   };
 
   onMarkerClick = (props, marker, e) =>
@@ -28,7 +29,7 @@ export class MapContainer extends React.Component {
 
   render() {
 
-    const { cafe, locations, actualMarker } = this.props;
+    const { cafe, /*location,*/ locations, actualMarker } = this.props;
 
     console.log(locations);
 
@@ -37,19 +38,70 @@ export class MapContainer extends React.Component {
       height: '100%'
     }
 
+    const markers = this.props.markers.map((venue, i) => {
+      const marker = {
+        position: {
+          lat: venue.location.lat,
+          lng: venue.location.lng
+        }  
+      }
+      return <Marker key={i} {...marker} />
+    })
+
+
+
     // check this
-    const markers = this.props.locations.map( location => <Marker 
+    /*const markers = this.props.locations.map( location => <Marker 
       key={location.id}
       cafe={cafe}
       location={{lat: location.lat, lng: location.lng }}
+      />)*/
+/* 
+    let markers = [];
+    //let mylocations;
+    let locationsValue = false
+    if (locations !== undefined 
+      && locations !== null
+      && locations.length > 0) {
+      locationsValue = true
+    }
+      //mylocations = this.state.cafes
+*/      
+/*
+    if (locationsValue) {
+      let marker = {};
+      const markers = this.props.locations.map((location) => {
+        marker = {  
+          position: {lat: location.lat, lng: location.lng},
+          key: location.id,
+          name: location.name,
+          lat: location.lat,
+          lng: location.lng,
+          address: location.address,
+        }
+        return markers.push(marker) 
+      })
+    }
+*/
+/*
+    if (locationsValue) {
+      let marker = {};
+      const markers = this.props.locations.map((location) => 
+        <Marker
+          
+          position={{lat: location.lat, lng: location.lng}}
+            key={location.id}
+            name={location.name}
+            lat={location.lat}
+            lng={location.lng}
+            address={location.address}
+            onClick={this.onMarkerClick}      
       />)
-
-    const handleSearch = this.props.handleSearch;
-
-
+    }
+*/
     return (
       <Map 
-        cafe={this.props.cafe}
+        // cafe={this.props.cafe}
         google={this.props.google} 
         zoom={14}
         initialCenter={{
@@ -58,11 +110,15 @@ export class MapContainer extends React.Component {
         }}
         onClick={this.onMapClicked}
         style={style}
-        handleSearch={this.state.handleSearch} //
       >
-        
+        {markers}
+        {/*<Marker 
+          onClick={this.onMarkerClick}
+          name={'Current location'}
+        />*/}
+  
         {/* display markers*/}
-        {locations.map(location =>
+        {/*locations.map(location => 
           <Marker 
             position={{lat: location.lat, lng: location.lng}}
             key={location.id}
@@ -73,7 +129,7 @@ export class MapContainer extends React.Component {
             onClick={this.onMarkerClick}
             selectedPlace={location === this.state.selectedPlace} //
           />
-        )}
+        )*/}
         
         <InfoWindow
           onOpen={this.windowHasOpened} 
@@ -86,7 +142,7 @@ export class MapContainer extends React.Component {
             </div>
         </InfoWindow>
         
-        {markers}
+       
 
       </Map>
     );

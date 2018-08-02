@@ -10,108 +10,125 @@ import Cafe from './components/cafe';
 
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 import MapContainer from './components/Map';
-import AsideMenu from "./components/AsideMenu";
+// import AsideMenu from "./components/AsideMenu";
 import FilteredList from "./components/FilteredList";
-import List from "./components/List";
-
+// import List from "./components/List";
+import superagent from 'superagent'
 
 export class App extends Component {
-  
-  //constructor(props) {
-  //  super(props);
-  //  this.
 
   state = {
     // center: {},
     showingInfoWindow: false,
     activeMarker: {},
-    // activeMarker: [],
     selectedPlace: {},
-    //cafes: [], //
-    allCafes: [], //
     selectedCafe: null, //
-    // actualMarker: '',
-    // value: '',
-    name: [],
     search: "",
-    //handleSearch: {},
-    filterList: [],   
+    locations: [],
+    venues: []
   };
-  //}
 
-  // test
   componentDidMount() {
-    // const url = "https://api.foursquare.com/v2/venues/"
-    const url = "https://raw.githubusercontent.com/MarcinMrow/db-sample/3b159dee401749a483be867444a18dcef0e5bfc4/locations.json"
-    fetch(url) // ajax
-      .then(response => response.json())
-      .then((data) => {
-        // console.log(data)
+    console.log('componentDidMount')
+      const url = "https://api.foursquare.com/v2/venues/search?ll=51.1079,17.0385&intent=browser&radius=10000&query=cafe&client_id=BDM3LB3BNSQGZV4QL0WX4TD1K1LYIRTGERM4A3YONTPSFR2U&client_secret=HPFMZTLH0BAGBWNVE3XA2ILS4Y1UKDG1VDN5CYFXIP0BVNNH&v=20180323"
+      superagent
+      .get(url)
+      .query(null)
+      .set('Accept', 'text/json')
+      .end((error, response) => {
+        const venues = response.body.response.venues
+        // console.log(JSON.stringify(venues))
         this.setState({
-          //cafes: data, //
-          allCafes: data,
-          selectedPlace: data, //
-        });
+          venues: venues
+        })
       })
   }
-
+ 
   render() {
-    let center = {
-    lat: 48.8566,
-    lng: 2.3522
+    const location = {
+      lat: 51.1079,
+      lng: 17.0385
     }
 
-    if (this.state.selectedFlat) {
-      center = {
-        lat: this.state.selectedFlat.lat,
-        lng: this.state.selectedFlat.lng
+    const markers = [
+      {
+        location: {
+          lat: 51.1079,
+          lng: 17.0385
+        }
       }
+    ]
+
+    /*let center = {
+      lat: 51.1079,
+      lng: 17.0385
     }
 
+    if (this.state.selectedCafe) {
+      center = {
+        lat: this.state.selectedCafe.lat,
+        lng: this.state.selectedCafe.lng
+      }
+    }*/
+
+    /*
     let mylocations;
     let locationsValue = false
 
-    if (this.state.allCafes !== undefined 
-      && this.state.allCafes !== null
-      && this.state.allCafes.length > 0) { 
-        mylocations = this.state.allCafes
+    if (this.state.cafes !== undefined 
+      && this.state.cafes !== null
+      && this.state.cafes.length > 0) { 
+        mylocations = this.state.cafes
         locationsValue = true
-      }
+      }*/
 
-    const cafes = this.state;
-    
+    // const cafes = this.state;
+
     return (
       
       <div className="app">
-
-        <FilteredList 
-          allCafes={this.state.allCafes}
-          filterList={this.state.filterList}
-          filterCafes={this.state.filterCafes}
-
-        />
-
-        { /*
-          <AsideMenu             
-            allCafes={this.state.allCafes}
-            //title={this.state.title}
-            //cafe={this.state.cafe}
-            //mylocations={this.state.mylocations}          
-          />
-          */
-        }
+        <div className="main">
         
-        { 
+        {/* 
           (locationsValue) && 
           (<MapContainer
             // markers={this.state.markers}
             actualMarker={this.state.actualMarker}
             locations={mylocations}
-            // handleSearch={this.state.handleSearch}
-          />)
+          />)*/
         } 
 
+        {/*add slider nav*/}
+        <nav className="menu-container">
+          <a href="#" className="menu-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M2 6h20v3H2zm0 5h20v3H2zm0 5h20v3H2z"></path>
+            </svg>
+          </a>
+            <div className="menu-slide">
+              <ul className="menu-list">
+                <li className="menu-item">
+                  <FilteredList 
+                    // allCafes={this.state.cafes}
+                    // filterCafes={this.state.filterCafes}
+                    handleSearch={this.state.handleSearch}
+                  />
+                </li>
+              </ul>
+            </div>
+        </nav>
+     
+        <MapContainer
+          center={location}
+          markers={this.state.venues}
+          actualMarker={this.state.actualMarker}
+          //locations={this.state.cafes}
+          
+        />
+
+        </div>
       </div>
+ 
     );
   }
 }

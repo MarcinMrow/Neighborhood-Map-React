@@ -13,7 +13,8 @@
     "react-native-foursquare-api": "0.0.4",
     "react-request": "^3.1.1",
     "react-scripts": "1.1.4",
-    "request": "^2.87.0"
+    "request": "^2.87.0",
+    "superagent": "^3.8.3"
   },
   "scripts": {
     "start": "react-scripts start",
