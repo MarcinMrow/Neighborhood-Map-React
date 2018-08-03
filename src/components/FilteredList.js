@@ -1,6 +1,6 @@
 import React from "react";
-import List from "./List";
-import Cafe from "./cafe";
+//import List from "./List";
+//import Cafe from "./cafe";
 
 import CafeOptions from './CafeOptions'
 
@@ -17,8 +17,6 @@ var params = {
   "query": 'Cafe'
 };
 
-
-
 export class FilteredList extends React.Component {
 
   state = {
@@ -28,7 +26,10 @@ export class FilteredList extends React.Component {
     query: "",
     cafes: [],
     // results: []
-    venues: []
+    venues: [],
+    cafe: [],
+    filteredCafes: [],
+    items: []
   }
 
   componentDidMount() {    
@@ -39,14 +40,6 @@ export class FilteredList extends React.Component {
           
         });
       });
-  }
-
-  //
-  selectCafe = (cafe) => {
-    console.log(cafe);
-    this.setState({
-      selectedCafe: cafe
-    })
   }
 
   handleSearch = () => {  
@@ -62,6 +55,23 @@ export class FilteredList extends React.Component {
     })
   }
 
+  handleClick = () => {
+    this.props.selectCafe(this.props.venues);
+  }
+
+  selectCafe = (cafe) => {
+    //console.log(cafe);
+    this.setState({
+      selectedCafe: cafe
+    })
+  }
+  
+/*
+  updateSearch = (event) => {
+    this.setState({search: event.target.value.substr(0, 20)});
+
+  }*/
+  
   /*handleSearch = (event) => {  
     this.setState({
       search: event.target.value,
@@ -70,7 +80,7 @@ export class FilteredList extends React.Component {
   }*/
 
   /*
-  filterList = (event) => {
+  handleSearch = (event) => {
     let updatedList = this.state.venues;
     updatedList = updatedList.filter((cafe) => {
       return cafe.toLowerCase().search(
@@ -78,15 +88,15 @@ export class FilteredList extends React.Component {
     });
     this.setState({items: updatedList});
   }*/
-/*
-  componentDidMount = () => {
-    this.setState({filterCafes: this.state.allCafes})
-  }*/
 
   render() {
-    //const { allCafes, title, cafe, mylocations } = this.props;
-    //console.log('FilteredList reads props ',allCafes);
-
+    //const { cafe } = this.props;
+    //console.log('FilteredList reads props ',cafes);
+    /*let filteredCafes = this.state.venues.filter((cafe) => {
+        return cafe.name.toLowerCase().indexOf(
+          this.state.search.toLowerCase()) !== -1;
+      }
+    );*/
     return (
       <div className="main">
 
@@ -101,35 +111,28 @@ export class FilteredList extends React.Component {
           <input
             type="text"
             placeholder="Search for..."
-            ref={input => {this.search = input}}
+            ref={input => this.search = input}
             onChange={this.handleSearch}
-            value={this.props.value}
+            //value={this.props.value}
+            //value={this.state.search}
+            //onChange={this.updateSearch.bind(this)}
           />
         </div>
          
         <div className="cafes">
-          <CafeOptions cafes={this.state.cafes} />
+
+          {/*<List cafes={this.state.cafes}/>*/}
+
+          {/*<ul>
+            {filteredCafes.map((cafe, index) => {
+              return <Cafe key={cafe.id} cafe={cafe} selectCafe={this.selectCafe} />
+              })}
+          </ul>*/}
+
+          <CafeOptions cafes={this.state.cafes} onClick={this.handleClick}/>
+          
         </div>
 
-        {/*
-        <div className="cafes">
-          {
-          (allCafes !== undefined && allCafes !== null && allCafes.length > 0 ) && (
-            <ul>
-              { allCafes.map((cafe, index) => {
-                // console.log('cafe');
-                return <Cafe 
-                  key={cafe.name} 
-                  cafe={cafe} 
-                  selectCafe={this.selectCafe}
-                  
-                />
-              }
-              )}
-            </ul>)
-          }
-        </div>*/
-        }
       </div>
     )
   }

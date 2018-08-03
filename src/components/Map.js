@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import {Map, InfoWindow, Marker, GoogleApiWrapper, withScriptjs} from 'google-maps-react';
 
+// ADDING PHOTOS
+var foursquare = require('react-foursquare')({
+  clientID: 'BDM3LB3BNSQGZV4QL0WX4TD1K1LYIRTGERM4A3YONTPSFR2U',
+  clientSecret: 'HPFMZTLH0BAGBWNVE3XA2ILS4Y1UKDG1VDN5CYFXIP0BVNNH'
+});
+
 export class MapContainer extends React.Component {
 
   state = {
@@ -8,7 +14,15 @@ export class MapContainer extends React.Component {
     activeMarker: {},
     selectedPlace: {},
     // selectedCafe: null //
-    //markers: []
+    // markers: []
+    // venue: {}
+
+    // ADDING PHOTOS
+    items: [],
+    query: '',
+    near: 'Wroclaw, Poland',
+    // cafes: [],
+    // venues: [],
   };
 
   onMarkerClick = (props, marker, e) =>
@@ -27,13 +41,42 @@ export class MapContainer extends React.Component {
     }
   };
 
+  // ADDING PHOTOS
+  componentDidMount() {
+    this.fetchVenues();
+  }
+
+  // ADDING PHOTOS
+  fetchVenues = () => {
+    var params = {
+      "near": this.state.near,
+      "intent": 'browse',
+      "ll": "51.1079, 17.0385",
+      "query": 'Cafe'
+    };
+    foursquare.venues.recommendations(params)
+      .then(res => {
+        console.log(res)
+        this.setState({ items: res.response.group.results });
+      })
+  }
+
+  /*
+  setQuery = event => {
+      this.setState({ query: event.target.value });
+  }
+  setLocation = event => {
+      this.setState({ near: event.target.value });
+  }
+  */
+
   render() {
 
     const { cafe, /*location,*/ locations, actualMarker } = this.props;
 
     console.log(locations);
 
-    const style = {
+    const styles = {
       width: '100%',
       height: '100%'
     }
@@ -43,62 +86,19 @@ export class MapContainer extends React.Component {
         position: {
           lat: venue.location.lat,
           lng: venue.location.lng
-        }  
-      }
-      return <Marker key={i} {...marker} />
-    })
-
-
-
-    // check this
-    /*const markers = this.props.locations.map( location => <Marker 
-      key={location.id}
-      cafe={cafe}
-      location={{lat: location.lat, lng: location.lng }}
-      />)*/
-/* 
-    let markers = [];
-    //let mylocations;
-    let locationsValue = false
-    if (locations !== undefined 
-      && locations !== null
-      && locations.length > 0) {
-      locationsValue = true
-    }
-      //mylocations = this.state.cafes
-*/      
-/*
-    if (locationsValue) {
-      let marker = {};
-      const markers = this.props.locations.map((location) => {
-        marker = {  
-          position: {lat: location.lat, lng: location.lng},
-          key: location.id,
-          name: location.name,
-          lat: location.lat,
-          lng: location.lng,
-          address: location.address,
         }
-        return markers.push(marker) 
+      }
+
+      return <Marker 
+        key={i} 
+        {...marker} 
+        name={venue.name}
+        address={venue.location.address}
+        onClick={this.onMarkerClick}
+        selectedPlace={venue === this.state.selectedPlace}
+        />
       })
-    }
-*/
-/*
-    if (locationsValue) {
-      let marker = {};
-      const markers = this.props.locations.map((location) => 
-        <Marker
-          
-          position={{lat: location.lat, lng: location.lng}}
-            key={location.id}
-            name={location.name}
-            lat={location.lat}
-            lng={location.lng}
-            address={location.address}
-            onClick={this.onMarkerClick}      
-      />)
-    }
-*/
+
     return (
       <Map 
         // cafe={this.props.cafe}
@@ -109,41 +109,39 @@ export class MapContainer extends React.Component {
           lng: 17.0385
         }}
         onClick={this.onMapClicked}
-        style={style}
+        styles={styles}
       >
+        {/*display markers on the map*/}
         {markers}
-        {/*<Marker 
-          onClick={this.onMarkerClick}
-          name={'Current location'}
-        />*/}
-  
-        {/* display markers*/}
-        {/*locations.map(location => 
-          <Marker 
-            position={{lat: location.lat, lng: location.lng}}
-            key={location.id}
-            name={location.name}
-            lat={location.lat}
-            lng={location.lng}
-            address={location.address}
-            onClick={this.onMarkerClick}
-            selectedPlace={location === this.state.selectedPlace} //
-          />
-        )*/}
         
         <InfoWindow
           onOpen={this.windowHasOpened} 
           onClose={this.onInfoWindowClose}
           marker={this.state.activeMarker}
           visible={this.state.showingInfoWindow}>
-            <div>
-              <h1>{this.state.selectedPlace.name}</h1>
-              <h2>{this.state.selectedPlace.address}</h2>
-            </div>
+            
+          { 
+            this.state.items.map(item => {
+              if (item.photo) {
+                let venue_url = "https://foursquare.com/v/" + item.venue.id;
+                let photo_url = item.photo.prefix + '300x300' + item.photo.suffix;
+                return (
+                  <div key={item.venue.id}>
+                    <a href={venue_url}>
+                      <img src={photo_url} alt={this.state.selectedPlace.name} />
+                    </a>  
+                    <div>
+                      <h2>{this.state.selectedPlace.name}</h2>
+                      <h3>Address: </h3>
+                        <p>{this.state.selectedPlace.address}</p>
+                    </div>
+                  </div>
+                  )
+              }
+            })
+          }
         </InfoWindow>
         
-       
-
       </Map>
     );
   }

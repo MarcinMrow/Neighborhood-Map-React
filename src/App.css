@@ -63,7 +63,6 @@
   position: sticky;
   /*background-color: green;*/
 }
-
 .cafes li {
   display: flex;
   flex-wrap: wrap;
@@ -76,8 +75,8 @@
   flex-basis: /*calc(50% - 20px)*/ 100%;
   margin: 10px;
   cursor: pointer;
+  /*background-color: #e0e0e0;*/
 }
-
 .cafe:hover {
   opacity: 0.8;
 }

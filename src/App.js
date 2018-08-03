@@ -15,6 +15,13 @@ import FilteredList from "./components/FilteredList";
 // import List from "./components/List";
 import superagent from 'superagent'
 
+//define foursquare variables to get photos
+const VENUE_ID = '4e9dd3a961af4feab6571edd'; // example
+const clientID ='BDM3LB3BNSQGZV4QL0WX4TD1K1LYIRTGERM4A3YONTPSFR2U';
+const clientSecret = 'HPFMZTLH0BAGBWNVE3XA2ILS4Y1UKDG1VDN5CYFXIP0BVNNH';
+const version = '20180323';
+
+
 export class App extends Component {
 
   state = {
@@ -26,11 +33,14 @@ export class App extends Component {
     search: "",
     locations: [],
     venues: []
-  };
+  }
+
+  
 
   componentDidMount() {
     console.log('componentDidMount')
       const url = "https://api.foursquare.com/v2/venues/search?ll=51.1079,17.0385&intent=browser&radius=10000&query=cafe&client_id=BDM3LB3BNSQGZV4QL0WX4TD1K1LYIRTGERM4A3YONTPSFR2U&client_secret=HPFMZTLH0BAGBWNVE3XA2ILS4Y1UKDG1VDN5CYFXIP0BVNNH&v=20180323"
+      // const url = `https://api.foursquare.com/v2/venues/${VENUE_ID}/photos?limit=1&client_id=${clientID}&client_secret=${clientSecret}&v=${version}`;
       superagent
       .get(url)
       .query(null)
@@ -39,9 +49,17 @@ export class App extends Component {
         const venues = response.body.response.venues
         // console.log(JSON.stringify(venues))
         this.setState({
-          venues: venues
+          venues: venues,
+          // selectedPlace: venues
         })
       })
+  }
+
+  selectCafe = (cafe) => {
+    console.log(cafe);
+    this.setState({
+      selectedCafe: cafe
+    })
   }
  
   render() {
@@ -58,6 +76,8 @@ export class App extends Component {
         }
       }
     ]
+
+    //const photo = `${photo.prefix}width300${photo.suffix}`
 
     /*let center = {
       lat: 51.1079,
@@ -100,7 +120,7 @@ export class App extends Component {
 
         {/*add slider nav*/}
         <nav className="menu-container">
-          <a href="#" className="menu-btn">
+          <a href="aside" className="menu-btn">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <path d="M2 6h20v3H2zm0 5h20v3H2zm0 5h20v3H2z"></path>
             </svg>
@@ -112,6 +132,8 @@ export class App extends Component {
                     // allCafes={this.state.cafes}
                     // filterCafes={this.state.filterCafes}
                     handleSearch={this.state.handleSearch}
+                    //inputRef={input => this.search = input}
+                    selectCafe={this.selectCafe}
                   />
                 </li>
               </ul>
@@ -122,8 +144,8 @@ export class App extends Component {
           center={location}
           markers={this.state.venues}
           actualMarker={this.state.actualMarker}
-          //locations={this.state.cafes}
-          
+          //selectedPlace={this.state.selectedPlace}
+          //showingInfoWindow={this.state.showingInfoWindow}
         />
 
         </div>

@@ -1,11 +1,13 @@
+
 import React from 'react';
 
 class CafeOptions extends React.Component {
+	
 	render() {
+
 		const options = this.props.cafes.map((cafe, index) => {
 			return (
 				<div className="cafe" onClick={this.handleClick}>
-					<div className="cafe-picture"></div>
 					<div className="cafe-title">
     				<li key={cafe.id} cafe={cafe} selectCafe={this.selectCafe}>
       				{cafe.name}
@@ -22,11 +24,14 @@ class CafeOptions extends React.Component {
 
 export default CafeOptions;
 
+
+
+
 /*
 import React from 'react';
 
-const Suggestions = (props) => {
-  const options = props.items.map(cafe => (
+const CafeOptions = (props) => {
+  const options = props.cafes.map(cafe => (
     <li key={cafe.id}>
       {cafe.name}
     </li>
@@ -34,14 +39,14 @@ const Suggestions = (props) => {
   return <ul>{options}</ul>
 }
 
-export default Suggestions;
+export default CafeOptions;
 */
 
 
 /*
 import React from 'react';
 
-const Suggestions = (props) => {
+const CafeOptions = (props) => {
 
   const options = props.cafes.map((cafe, index) => (
   	
@@ -57,4 +62,4 @@ const Suggestions = (props) => {
   return <ul>{options}</ul>
 }
 
-export default Suggestions;*/
+export default CafeOptions;*/
