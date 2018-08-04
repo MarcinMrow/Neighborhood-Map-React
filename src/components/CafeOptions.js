@@ -5,12 +5,12 @@ class CafeOptions extends React.Component {
 	
 	render() {
 
-		const options = this.props.cafes.map((cafe, index) => {
+		const options = this.props.items.map((item, index) => {
 			return (
 				<div className="cafe" onClick={this.handleClick}>
 					<div className="cafe-title">
-    				<li key={cafe.id} cafe={cafe} selectCafe={this.selectCafe}>
-      				{cafe.name}
+    				<li key={item.id} cafe={item} selectCafe={this.selectCafe}>
+      				{item.name}
     				</li>
     			</div>
     		</div>

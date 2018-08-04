@@ -76,7 +76,7 @@ export class MapContainer extends React.Component {
 
     console.log(locations);
 
-    const styles = {
+    const style = {
       width: '100%',
       height: '100%'
     }
@@ -109,7 +109,7 @@ export class MapContainer extends React.Component {
           lng: 17.0385
         }}
         onClick={this.onMapClicked}
-        styles={styles}
+        style={style}
       >
         {/*display markers on the map*/}
         {markers}

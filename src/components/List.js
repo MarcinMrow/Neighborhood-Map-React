@@ -10,7 +10,7 @@ export class List extends React.Component {
   }
   render() {
     //const filterCafes = this.props.filterCafes;
-    const items = this.props;
+    //const items = this.props;
 
     return (
 
@@ -18,9 +18,9 @@ export class List extends React.Component {
         
         <ul>
         {
-          cafes.map((cafe, index) => {
+          this.props.items.map((item, index) => {
             console.log('where is the cafe name?');
-            return <Cafe key={cafe.name} cafe={cafe} selectCafe={this.selectCafe} />
+            return <Cafe key={item.name} item={item} selectCafe={this.selectCafe} />
           })
         }
         </ul>

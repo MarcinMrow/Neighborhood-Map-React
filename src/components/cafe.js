@@ -2,28 +2,15 @@ import React from "react";
 // import "./App.css";
 
 export class Cafe extends React.Component {
-	/*
-  state = {
-    cafes: [],
-    value: '',
-    title: '',
-    selectedCafe: null,
-  };
-  */
 
-	handleClick = () => {
-		this.props.selectCafe(this.props.cafe);
-	}
-
-/*
 	handleClick = (event) => {
 		this.setState({value: event.target.value});
 		console.log('click');
-	}*/
+	}
 
 	render() {
 		/*const title = this.props.cafe.name + " - " + this.props.cafe.address;*/
-		const title = this.props.cafe.name;
+		const title = this.props.item.name;
 		
 		/*
 		const style = {

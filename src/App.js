@@ -31,7 +31,7 @@ export class App extends Component {
     selectedPlace: {},
     selectedCafe: null, //
     search: "",
-    locations: [],
+    // locations: [],
     venues: []
   }
 
@@ -54,13 +54,14 @@ export class App extends Component {
         })
       })
   }
-
+  /*
   selectCafe = (cafe) => {
     console.log(cafe);
     this.setState({
       selectedCafe: cafe
     })
   }
+  */
  
   render() {
     const location = {
@@ -78,8 +79,8 @@ export class App extends Component {
     ]
 
     //const photo = `${photo.prefix}width300${photo.suffix}`
-
-    /*let center = {
+    /*
+    let center = {
       lat: 51.1079,
       lng: 17.0385
     }
@@ -89,34 +90,12 @@ export class App extends Component {
         lat: this.state.selectedCafe.lat,
         lng: this.state.selectedCafe.lng
       }
-    }*/
-
-    /*
-    let mylocations;
-    let locationsValue = false
-
-    if (this.state.cafes !== undefined 
-      && this.state.cafes !== null
-      && this.state.cafes.length > 0) { 
-        mylocations = this.state.cafes
-        locationsValue = true
-      }*/
-
-    // const cafes = this.state;
-
+    }
+    */
     return (
       
       <div className="app">
         <div className="main">
-        
-        {/* 
-          (locationsValue) && 
-          (<MapContainer
-            // markers={this.state.markers}
-            actualMarker={this.state.actualMarker}
-            locations={mylocations}
-          />)*/
-        } 
 
         {/*add slider nav*/}
         <nav className="menu-container">
@@ -129,11 +108,8 @@ export class App extends Component {
               <ul className="menu-list">
                 <li className="menu-item">
                   <FilteredList 
-                    // allCafes={this.state.cafes}
-                    // filterCafes={this.state.filterCafes}
-                    handleSearch={this.state.handleSearch}
-                    //inputRef={input => this.search = input}
-                    selectCafe={this.selectCafe}
+                    //handleSearch={this.state.handleSearch}
+                    //selectCafe={this.selectCafe}
                   />
                 </li>
               </ul>
@@ -144,7 +120,7 @@ export class App extends Component {
           center={location}
           markers={this.state.venues}
           actualMarker={this.state.actualMarker}
-          //selectedPlace={this.state.selectedPlace}
+          selectedPlace={this.state.selectedPlace}
           //showingInfoWindow={this.state.showingInfoWindow}
         />
 
