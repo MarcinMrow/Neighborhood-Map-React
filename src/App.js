@@ -11,9 +11,11 @@ import Cafe from './components/cafe';
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 import MapContainer from './components/Map';
 // import AsideMenu from "./components/AsideMenu";
-import FilteredList from "./components/FilteredList";
+// import FilteredList from "./components/FilteredList";
 // import List from "./components/List";
-import superagent from 'superagent'
+import superagent from 'superagent';
+
+import FilterableItemList from './components/FilterableItemList';
 
 //define foursquare variables to get photos
 const VENUE_ID = '4e9dd3a961af4feab6571edd'; // example
@@ -32,7 +34,8 @@ export class App extends Component {
     selectedCafe: null, //
     search: "",
     // locations: [],
-    venues: []
+    venues: [],
+    items: []
   }
 
   
@@ -47,7 +50,7 @@ export class App extends Component {
       .set('Accept', 'text/json')
       .end((error, response) => {
         const venues = response.body.response.venues
-        // console.log(JSON.stringify(venues))
+        //console.log(JSON.stringify(venues))
         this.setState({
           venues: venues,
           // selectedPlace: venues
@@ -63,6 +66,7 @@ export class App extends Component {
   }
   */
  
+
   render() {
     const location = {
       lat: 51.1079,
@@ -92,6 +96,17 @@ export class App extends Component {
       }
     }
     */
+    /*
+    const items = [
+      {name: 'Nero'},
+      {name: 'Costa'},
+      {name: 'Cherubinowy'},
+      {name: 'Targowa'},
+      {name: 'Vinyl'},
+      {name: 'Rozrusznik'}
+    ];*/
+
+
     return (
       
       <div className="app">
@@ -107,10 +122,16 @@ export class App extends Component {
             <div className="menu-slide">
               <ul className="menu-list">
                 <li className="menu-item">
-                  <FilteredList 
+                  {/*<FilteredList 
                     //handleSearch={this.state.handleSearch}
-                    //selectCafe={this.selectCafe}
-                  />
+                    
+                  />*/}
+
+                  {/**/}
+
+                  <FilterableItemList items={this.state.venues} />
+
+
                 </li>
               </ul>
             </div>

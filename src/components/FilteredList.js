@@ -3,6 +3,7 @@ import List from "./List";
 import Cafe from "./cafe";
 
 import CafeOptions from './CafeOptions'
+//import FilterableItemList from './FilterableItemList'
 
 // import * as cafeLocations from './locations.json';
 // const allCafes = "https://raw.githubusercontent.com/MarcinMrow/db-sample/3b159dee401749a483be867444a18dcef0e5bfc4/locations.json"
@@ -16,6 +17,8 @@ var params = {
   "ll": "51.1079, 17.0385",
   "query": 'Cafe'
 };
+
+
 
 export class FilteredList extends React.Component {
 
@@ -32,9 +35,11 @@ export class FilteredList extends React.Component {
     items: []
   }
 
-  componentDidMount() {    
+  componentDidMount() {
+    console.log('componentDidMount')    
     foursquare.venues.getVenues(params)
       .then(res => {
+        console.log(res)
         this.setState({ 
           items: res.response.venues
           
@@ -64,11 +69,22 @@ export class FilteredList extends React.Component {
   }*/
 
   
+/*// enter value -> list not visible
+  updateSearch = (event) => {
+    this.setState({
+      search: event.target.value.substr(0, 30),
+      items: this.state.venues.filter((item) => new RegExp(event.target.value, "i").exec(item.name))
+    });
+  }  
+*/
 
   updateSearch = (event) => {
-    this.setState({search: event.target.value.substr(0, 30)});
+    this.setState({
+      search: event.target.value.substr(0, 30),
+      venues: this.state.items.filter((item) => new RegExp(event.target.value, "i").exec(item.name))
+    });
+  }  
 
-  }
   /*
   handleSearch = (event) => {  
     this.setState({
@@ -90,15 +106,16 @@ export class FilteredList extends React.Component {
   render() {
     //const { cafe } = this.props;
     //console.log('FilteredList reads props ',cafes);
-    let items = this.state.venues.filter((item) => {
+    /*let items = this.state.venues.filter((item) => {
         return item.name.toLowerCase().indexOf(
           this.state.search.toLowerCase()) !== -1;
       }
-    );
-    
+    );*/
+
+
     return (
       <div className="main">
-
+      {
         <div className="search">
           <input 
             type="text" 
@@ -107,8 +124,11 @@ export class FilteredList extends React.Component {
             onChange={this.updateSearch.bind(this)}
           />
         </div>
+      }
 
-         {/*<div className="search">
+        {/*<FilterableItemList items={items} />*/}
+
+        {/*<div className="search">
           <input
             type="text"
             placeholder="Search for..."
@@ -121,7 +141,7 @@ export class FilteredList extends React.Component {
         </div>*/}
          
         <div className="cafes">
-          <List items={this.state.items}/>
+          {<List items={this.state.items} />}
           {/*<List cafes={this.state.cafes}/>*/}
 
           {/*<ul>
@@ -137,6 +157,7 @@ export class FilteredList extends React.Component {
           <div>Items:</div>
         { this.state.items.map(item=> { return <div key={item.id}>{item.name}</div>}) }
 */}
+
         </div>
 
       </div>
