@@ -2,7 +2,6 @@ import React from "react";
 import SearchInput from "./SearchInput";
 import ItemList from "./ItemList";
 
-
 class FilterableItemList extends React.Component {
   constructor(props) {
     super(props);

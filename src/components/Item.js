@@ -25,9 +25,10 @@ import React from "react";
 
 class Item extends React.Component {
 
-  handleClick = (event) => {
-    this.setState({value: event.target.value});
-    console.log('click');
+  handleClick = () => {
+    //console.log('click on cafe')
+    // call the selectCafe
+    this.props.selectCafe(this.props.item);
   }
 
   render() {
@@ -39,7 +40,11 @@ class Item extends React.Component {
   
     return (
       <div className="cafe"
-        onClick={this.handleClick}>
+        onClick={this.handleClick}
+        role="button"
+        tabIndex={0}
+        // onKeyPress={this.showInfo}
+        >
           <div className="cafe-title">
             {title}
           </div> 

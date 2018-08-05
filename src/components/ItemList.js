@@ -2,6 +2,14 @@ import React from "react";
 import Item from "./Item";
 
 class ItemList extends React.Component {
+  //
+  selectCafe = (item) => {
+    console.log(item);
+    this.setState({
+      selectedCafe: item
+    })
+  }
+  
   render() {
     const filterInput = this.props.filterInput;
    
@@ -15,7 +23,8 @@ class ItemList extends React.Component {
       rows.push(
         <Item
           item={item}
-          key={item.name}
+          key={item.id}
+          selectCafe={this.selectCafe} // ?
         />
       );
      
@@ -24,9 +33,9 @@ class ItemList extends React.Component {
     return (
 
       <div className="cafes">
-        <div>
-          <ul>{rows}</ul>    
-        </div>
+        <ul>
+          <li>{rows}</li>       
+        </ul>
       </div>
 
     );

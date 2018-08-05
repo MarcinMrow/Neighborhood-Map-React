@@ -25,23 +25,23 @@ const version = '20180323';
 */
 
 export class App extends Component {
-
-  state = {
+  constructor(props) {
+    super(props);
+    this.state = {
     // center: {},
-    showingInfoWindow: false,
-    activeMarker: {},
-    selectedPlace: {},
-    selectedCafe: null, //
-    search: "",
-    // locations: [],
-    venues: [],
-    items: []
+      showingInfoWindow: false,
+      activeMarker: {},
+      selectedPlace: {},
+      // selectedItems: null, //
+      search: "",
+      // locations: [],
+      venues: [],
+      // items: []
+    };
   }
 
-  
-
   componentDidMount() {
-    console.log('componentDidMount')
+    // console.log('componentDidMount')
       const url = "https://api.foursquare.com/v2/venues/search?ll=51.1079,17.0385&intent=browser&radius=10000&query=cafe&client_id=BDM3LB3BNSQGZV4QL0WX4TD1K1LYIRTGERM4A3YONTPSFR2U&client_secret=HPFMZTLH0BAGBWNVE3XA2ILS4Y1UKDG1VDN5CYFXIP0BVNNH&v=20180323"
       // const url = `https://api.foursquare.com/v2/venues/${VENUE_ID}/photos?limit=1&client_id=${clientID}&client_secret=${clientSecret}&v=${version}`;
       superagent
@@ -51,21 +51,13 @@ export class App extends Component {
       .end((error, response) => {
         const venues = response.body.response.venues
         //console.log(JSON.stringify(venues))
+        console.log(venues)
         this.setState({
           venues: venues,
           // selectedPlace: venues
         })
       })
   }
-  /*
-  selectCafe = (cafe) => {
-    console.log(cafe);
-    this.setState({
-      selectedCafe: cafe
-    })
-  }
-  */
- 
 
   render() {
     const location = {
@@ -82,8 +74,6 @@ export class App extends Component {
       }
     ]
 
-    //const photo = `${photo.prefix}width300${photo.suffix}`
-    /*
     let center = {
       lat: 51.1079,
       lng: 17.0385
@@ -95,8 +85,8 @@ export class App extends Component {
         lng: this.state.selectedCafe.lng
       }
     }
-    */
-    
+
+    // array used with line:120
     /*const items = [
       {name: 'Nero'},
       {name: 'Costa'},
@@ -105,7 +95,6 @@ export class App extends Component {
       {name: 'Vinyl'},
       {name: 'Rozrusznik'}
     ];*/
-
 
     return (
       
@@ -131,21 +120,18 @@ export class App extends Component {
                 {/* chose with const items to display list of cafes App.js: line 100 */}
                   {/* <FilterableItemList items={items} /> */}
 
-
-
-                  {/*<FilteredList />*/}
-
                 </li>
               </ul>
             </div>
         </nav>
      
         <MapContainer
-          center={location}
+          center={center}
           markers={this.state.venues}
           actualMarker={this.state.actualMarker}
-          selectedPlace={this.state.selectedPlace}
+          //selectedPlace={this.state.selectedPlace}
           //showingInfoWindow={this.state.showingInfoWindow}
+          selectedCafe={this.state.selectedCafe}
         />
 
         </div>

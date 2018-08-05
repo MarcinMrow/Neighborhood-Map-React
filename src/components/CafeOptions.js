@@ -24,9 +24,6 @@ class CafeOptions extends React.Component {
 
 export default CafeOptions;
 
-
-
-
 /*
 import React from 'react';
 

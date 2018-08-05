@@ -232,3 +232,19 @@
   -ms-transition: 0.2s ease-in-out;
   -o-transition: 0.2s ease-in-out;
 }
+
+/* ====================== Info Window ====================== */
+.info-window {
+
+}
+
+/* ?? change colour of the marker */
+
+.marker {
+  background-color: white;
+}
+
+.marker.selected {
+  background-color: yellow;
+  border-color: black;
+}
