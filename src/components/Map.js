@@ -72,7 +72,7 @@ export class MapContainer extends React.Component {
 
   render() {
 
-    const { cafe, /*location,*/ locations, actualMarker } = this.props;
+    const { /*cafe, location,*/ locations, actualMarker } = this.props;
 
     console.log(locations);
 

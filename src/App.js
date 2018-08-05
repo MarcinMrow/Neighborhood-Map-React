@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import GoogleMapReact from 'google-map-react';
-import $ from 'jquery';
-import { Fetch } from 'react-request';
+//import GoogleMapReact from 'google-map-react';
+//import $ from 'jquery';
+//import { Fetch } from 'react-request';
 // import logo from './logo.svg';
 import './App.css';
-import Cafe from './components/cafe';
+//import Cafe from './components/cafe';
 // import Marker from './components/marker';
 
 
@@ -14,15 +14,15 @@ import MapContainer from './components/Map';
 // import FilteredList from "./components/FilteredList";
 // import List from "./components/List";
 import superagent from 'superagent';
-
 import FilterableItemList from './components/FilterableItemList';
 
+/*
 //define foursquare variables to get photos
 const VENUE_ID = '4e9dd3a961af4feab6571edd'; // example
 const clientID ='BDM3LB3BNSQGZV4QL0WX4TD1K1LYIRTGERM4A3YONTPSFR2U';
 const clientSecret = 'HPFMZTLH0BAGBWNVE3XA2ILS4Y1UKDG1VDN5CYFXIP0BVNNH';
 const version = '20180323';
-
+*/
 
 export class App extends Component {
 
@@ -96,8 +96,8 @@ export class App extends Component {
       }
     }
     */
-    /*
-    const items = [
+    
+    /*const items = [
       {name: 'Nero'},
       {name: 'Costa'},
       {name: 'Cherubinowy'},
@@ -122,15 +122,18 @@ export class App extends Component {
             <div className="menu-slide">
               <ul className="menu-list">
                 <li className="menu-item">
-                  {/*<FilteredList 
-                    //handleSearch={this.state.handleSearch}
-                    
-                  />*/}
 
-                  {/**/}
-
+                {/* */}
+                  {/* <FilterableItemList items={this.state.venues} /> */}
+                
                   <FilterableItemList items={this.state.venues} />
 
+                {/* chose with const items to display list of cafes App.js: line 100 */}
+                  {/* <FilterableItemList items={items} /> */}
+
+
+
+                  {/*<FilteredList />*/}
 
                 </li>
               </ul>

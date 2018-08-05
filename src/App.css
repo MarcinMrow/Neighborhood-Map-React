@@ -63,10 +63,11 @@
   position: sticky;
   /*background-color: green;*/
 }
-.cafes li {
+.cafes li, ul {
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
+  padding: auto;
 }
 
 /* ====================== Cafe ====================== */
@@ -101,6 +102,7 @@
   text-align: center;
   align-content: center;
 }
+
 
 
 /* ====================== Marker ====================== */
@@ -150,6 +152,8 @@
   -o-transition: 0.5s ease-in-out;
 }*/
 /* Menu */
+
+
 .menu-container:hover .menu-slide {
   -o-transform: translate(400px, 0);
   -moz-transform: translate(400px, 0);

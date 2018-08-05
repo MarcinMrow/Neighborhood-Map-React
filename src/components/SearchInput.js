@@ -14,14 +14,14 @@ class SearchInput extends React.Component {
 
   	console.log('click')
     return (
-      <form>
+      <div className="search">
         <input
           type="text"
-          placeholder="Search..."
+          placeholder="Search your cafe..."
           value={this.props.filterInput}
           onChange={this.handleTextChange}
         />
-      </form>
+      </div>
     );
   }
 }

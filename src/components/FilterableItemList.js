@@ -15,10 +15,10 @@ class FilterableItemList extends React.Component {
 
   handleTextChange(filterInput) {
     this.setState({
-      filterInput: filterInput
+      filterInput: filterInput,
     });
   }
-  
+
   render() {
     return (
       <div>

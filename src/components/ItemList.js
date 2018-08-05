@@ -22,14 +22,13 @@ class ItemList extends React.Component {
     });
 
     return (
-      <table>
-        <thead>
-          <tr>
-            <th>Your Cafes</th>    
-          </tr>
-        </thead>
-        <tbody>{rows}</tbody>
-      </table>
+
+      <div className="cafes">
+        <div>
+          <ul>{rows}</ul>    
+        </div>
+      </div>
+
     );
   }
 }
