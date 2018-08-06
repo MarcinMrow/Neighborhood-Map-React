@@ -25,6 +25,7 @@ export class MapContainer extends React.Component {
     // venues: [],
     //
     //filteredMarkers: [],
+    map: {},
 
   };
 
@@ -84,12 +85,15 @@ export class MapContainer extends React.Component {
     }
   }
 */
-  
+
+
+
   render() {
     
-    const { cafe, location, locations, actualMarker } = this.props;
     
-    // console.log(locations);
+
+
+    const { cafe, location, locations, actualMarker, filterLocations, google, map, onMarkerClick, activeMarker } = this.props;
 
     const style = {
       width: '100%',
@@ -107,75 +111,87 @@ export class MapContainer extends React.Component {
           lat: venue.location.lat,
           lng: venue.location.lng
         },
+        map: map,
+        //icon: icons,
+       
+      
         // animation: this.props.google.maps.Animation.DROP //
       }
 
-      return <Marker 
+      return <Marker
+        className={classes}
+        aria-label="Marker of the cafe" //
         key={i} 
         {...marker} 
         name={venue.name}
         address={venue.location.address}
         onClick={this.onMarkerClick}
-        // selectedPlace={venue === this.state.selectedPlace}
-        animation={this.props.google.maps.Animation.DROP} //
+        selectedPlace={venue === this.state.selectedPlace}
+        // animation={this.props.google.maps.Animation.DROP} //
         selected={venue.item === this.state.selectedCafe} //
-        classes={classes} //
+        id={venue.id}
+  
         />
       });
 
     return (
-      <Map 
-        // cafe={this.props.cafe}
-        google={this.props.google} 
-        zoom={13}
-        initialCenter={{
-          lat: 51.1079,
-          lng: 17.0385
-        }}
-        onClick={this.onMapClicked}
-        style={style}
-      >
-        {/*display markers on the map*/}
-        {markers}
-        
-        <InfoWindow
-          onOpen={this.windowHasOpened} 
-          onClose={this.onInfoWindowClose}
-          marker={this.state.activeMarker}
-          visible={this.state.showingInfoWindow}
-          >
+      <div className="map-container" role="application">
+        <Map 
+          aria-label="location"  //
+          role="application"
+          // cafe={this.props.cafe}
+          google={this.props.google} 
+          zoom={13}
+          initialCenter={{
+            lat: 51.1079,
+            lng: 17.0385
+          }}
+          onClick={this.onMapClicked}
+          style={style}         
+        >
+          {/*display markers on the map*/}
+          {markers}
+                 
+          <InfoWindow
+            aria-label="Information about cafe"
+            onOpen={this.windowHasOpened} 
+            onClose={this.onInfoWindowClose}
+            marker={this.state.activeMarker}
+            visible={this.state.showingInfoWindow}
+            >
           
-            <div className="info-window" tabIndex={0} aria-label="Info window">
-              <h2>{this.state.selectedPlace.name}</h2>
-              <h3>Address: </h3>
-                <p>{this.state.selectedPlace.address}</p>
-            </div>
+              <div className="info-window" tabIndex={0} aria-label="Info window">
+                <h2>{this.state.selectedPlace.name}</h2>
+                <h3>Address: </h3>
+                  <p>{this.state.selectedPlace.address}</p>
+              </div>
 
-          {/*add photos - array ? */}
-          {/* 
-            this.state.items.map(item => {
-              if (item.photo) {
-                let venue_url = "https://foursquare.com/v/" + item.venue.id;
-                let photo_url = item.photo.prefix + '300x300' + item.photo.suffix;
-                return (
-                  <div key={item.venue.id}>
-                    <a href={venue_url}>
-                      <img src={photo_url} alt={this.state.selectedPlace.name} />
-                    </a>  
-                    <div>
-                      <h2>{this.state.selectedPlace.name}</h2>
-                      <h3>Address: </h3>
-                        <p>{this.state.selectedPlace.address}</p>
+            {/*add photos - array ? */}
+            {/* 
+              this.state.items.map(item => {
+                if (item.photo) {
+                  let venue_url = "https://foursquare.com/v/" + item.venue.id;
+                  let photo_url = item.photo.prefix + '300x300' + item.photo.suffix;
+                  return (
+                    <div key={item.venue.id}>
+                      <a href={venue_url}>
+                        <img src={photo_url} alt={this.state.selectedPlace.name} />
+                      </a>  
+                      <div>
+                        <h2>{this.state.selectedPlace.name}</h2>
+                        <h3>Address: </h3>
+                          <p>{this.state.selectedPlace.address}</p>
+                      </div>
                     </div>
-                  </div>
-                  )
-              }
-            })
-          */}
+                    )
+                }
+              })
+            */}
 
-        </InfoWindow>
+          </InfoWindow>
         
-      </Map>
+        </Map>
+      </div>
     );
   }
 }

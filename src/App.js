@@ -36,11 +36,16 @@ export class App extends Component {
       search: "",
       // locations: [],
       venues: [],
-      // items: []
+      items: [], //
+      selectedCafe: null
     };
   }
 
   componentDidMount() {
+    this.getCafes();
+  }
+
+  getCafes() {
     // console.log('componentDidMount')
       const url = "https://api.foursquare.com/v2/venues/search?ll=51.1079,17.0385&intent=browser&radius=10000&query=cafe&client_id=BDM3LB3BNSQGZV4QL0WX4TD1K1LYIRTGERM4A3YONTPSFR2U&client_secret=HPFMZTLH0BAGBWNVE3XA2ILS4Y1UKDG1VDN5CYFXIP0BVNNH&v=20180323"
       // const url = `https://api.foursquare.com/v2/venues/${VENUE_ID}/photos?limit=1&client_id=${clientID}&client_secret=${clientSecret}&v=${version}`;
@@ -59,7 +64,17 @@ export class App extends Component {
       })
   }
 
+  selectCafe = (item) => {
+    console.log(item);
+    this.setState({
+      selectedCafe: item
+    })
+  }
+
+
   render() {
+    //const { filterLocations } = this.props; // ? filter markers
+
     const location = {
       lat: 51.1079,
       lng: 17.0385
@@ -115,7 +130,10 @@ export class App extends Component {
                 {/* */}
                   {/* <FilterableItemList items={this.state.venues} /> */}
                 
-                  <FilterableItemList items={this.state.venues} />
+                  <FilterableItemList 
+                    items={this.state.venues} 
+                    
+                  />
 
                 {/* chose with const items to display list of cafes App.js: line 100 */}
                   {/* <FilterableItemList items={items} /> */}
@@ -129,9 +147,11 @@ export class App extends Component {
           center={center}
           markers={this.state.venues}
           actualMarker={this.state.actualMarker}
+          showingInfoWindow={this.state.showingInfoWindow}
           //selectedPlace={this.state.selectedPlace}
-          //showingInfoWindow={this.state.showingInfoWindow}
           selectedCafe={this.state.selectedCafe}
+          activeMarker={this.state.activeMarker}
+ 
         />
 
         </div>

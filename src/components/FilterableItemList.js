@@ -34,5 +34,4 @@ class FilterableItemList extends React.Component {
   }
 }
 
-
 export default FilterableItemList;
