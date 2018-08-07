@@ -11,8 +11,7 @@ class SearchInput extends React.Component {
   }
   
   render() {
-
-  	console.log('click on search')
+  	// console.log('click on search')
     return (
       <div className="search">
         <input

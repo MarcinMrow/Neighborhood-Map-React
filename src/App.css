@@ -45,7 +45,7 @@
 
 .search {
   padding: 10px;
-  margin-right: 5px;
+  margin: 10px;
 }
 
 .search input {
@@ -53,7 +53,6 @@
   height: 40px;
   font-size: 24px;
   color: #999;
-  padding-left: 5px;
 }
 
 .map {
@@ -61,22 +60,24 @@
   height: 100vh;
   top: 0;
   position: sticky;
-  /*background-color: green;*/
 }
-.cafes li, ul {
+.cafes li {
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
   padding: auto;
+}
+.cafes ul {
+  padding: 0;
 }
 
 /* ====================== Cafe ====================== */
 
 .cafe {
   flex-basis: /*calc(50% - 20px)*/ 100%;
-  margin: 10px;
+  margin: 10px 20px;
   cursor: pointer;
-  /*background-color: #e0e0e0;*/
+  background-color: #e0e0e0;
 }
 .cafe:hover {
   opacity: 0.8;
@@ -153,6 +154,9 @@
 }*/
 /* Menu */
 
+.menu-container {
+  background-color: #98e8f2;
+}
 
 .menu-container:hover .menu-slide {
   -o-transform: translate(400px, 0);
@@ -161,6 +165,7 @@
   -webkit-transform: translate(400px, 0);
   transform: translate(400px, 0);
   opacity: 1;
+  /*background-color: #2d7dce;*/
 }
 .menu-container .menu-btn {
   color: #333333;
@@ -247,4 +252,15 @@
 .marker.selected {
   background-color: yellow;
   border-color: black;
+}
+
+
+/* ====================== RESPONSIVE - Media Query ====================== */
+
+@media screen (min-width: 600px) {
+  /*
+  .menu-container .menu-slide .menu-list {
+    width: 100%;
+  }*/
+
 }

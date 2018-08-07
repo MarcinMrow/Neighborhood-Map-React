@@ -16,6 +16,7 @@ class FilterableItemList extends React.Component {
     this.setState({
       filterInput: filterInput,
     });
+    this.props.filterItems(filterInput);
   }
 
   render() {

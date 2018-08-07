@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 //import GoogleMapReact from 'google-map-react';
-//import $ from 'jquery';
+// import $ from 'jquery';
 //import { Fetch } from 'react-request';
 // import logo from './logo.svg';
 import './App.css';
@@ -15,6 +15,7 @@ import MapContainer from './components/Map';
 // import List from "./components/List";
 import superagent from 'superagent';
 import FilterableItemList from './components/FilterableItemList';
+import ErrorBoundary from './components/ErrorBoundary';
 
 /*
 //define foursquare variables to get photos
@@ -37,13 +38,59 @@ export class App extends Component {
       // locations: [],
       venues: [],
       items: [], //
-      selectedCafe: null
+      selectedCafe: null,
+      markers: [],
+      marker: [],
+   
     };
+    this.filterItems = this.filterItems.bind(this);
+    this.toggleBounce = this.toggleBounce.bind(this);
   }
 
   componentDidMount() {
     this.getCafes();
   }
+
+  filterItems(filter) {
+    // console.log('filter items called!');
+    let venues = [...this.state.venues];
+    venues.forEach((item) => {
+      if (item.name.toLowerCase().indexOf(filter.toLowerCase()) === -1) {
+        item.isVisible = false;
+        return;
+      }
+      item.isVisible = true;
+    });
+    this.setState({ venues });
+  }
+
+  // ?? 
+  handleOnCafeClick() {
+    console.log('???!!!');
+    let marker;
+    let venues = [...this.state.venues];
+      venues.forEach(item => {
+        if (item.target.id === marker.name) {
+        this.toggleBounce();  
+        }
+      });
+      this.setState({ 
+        markers: [] 
+      });
+    }
+
+  // ??
+  toggleBounce() {
+    console.log('bouncing?')
+    let marker;
+    //if (e.target.item.id === marker.name) {
+      if (marker.getAnimation() !== null) {
+        marker.setAnimation(null);
+      } else {
+        marker.setAnimation(this.state.google.maps.Animation.BOUNCE);
+      }
+    }
+    //}
 
   getCafes() {
     // console.log('componentDidMount')
@@ -55,8 +102,8 @@ export class App extends Component {
       .set('Accept', 'text/json')
       .end((error, response) => {
         const venues = response.body.response.venues
-        //console.log(JSON.stringify(venues))
-        console.log(venues)
+        // console.log(JSON.stringify(venues))
+        //console.log(venues)
         this.setState({
           venues: venues,
           // selectedPlace: venues
@@ -64,6 +111,7 @@ export class App extends Component {
       })
   }
 
+/*
   selectCafe = (item) => {
     console.log(item);
     this.setState({
@@ -71,9 +119,16 @@ export class App extends Component {
     })
   }
 
+  handleClick = () => {
+    // console.log('click on cafe')
+    // call the selectCafe
+    this.props.selectCafe(this.props.item);
+  }
+*/
+
 
   render() {
-    //const { filterLocations } = this.props; // ? filter markers
+
 
     const location = {
       lat: 51.1079,
@@ -111,51 +166,55 @@ export class App extends Component {
       {name: 'Rozrusznik'}
     ];*/
 
+
     return (
-      
-      <div className="app">
-        <div className="main">
+      <ErrorBoundary>
 
-        {/*add slider nav*/}
-        <nav className="menu-container">
-          <a href="aside" className="menu-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-              <path d="M2 6h20v3H2zm0 5h20v3H2zm0 5h20v3H2z"></path>
-            </svg>
-          </a>
-            <div className="menu-slide">
-              <ul className="menu-list">
-                <li className="menu-item">
+        <div className="app">
+          <div className="main">
+          
+          {/*add slider nav*/}
+          <nav className="menu-container">
+            <a href="menu" className="menu-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M2 6h20v3H2zm0 5h20v3H2zm0 5h20v3H2z"></path>
+              </svg>
+            </a>
+              <div className="menu-slide">
+                <ul className="menu-list">
+                  <li className="menu-item">
 
-                {/* */}
-                  {/* <FilterableItemList items={this.state.venues} /> */}
+                  {/* */}
+                    {/* <FilterableItemList items={this.state.venues} /> */}
                 
-                  <FilterableItemList 
-                    items={this.state.venues} 
-                    
-                  />
+                    <FilterableItemList 
+                      items={this.state.venues}
+                      filterItems={this.filterItems}
+                      
+                    />
 
-                {/* chose with const items to display list of cafes App.js: line 100 */}
-                  {/* <FilterableItemList items={items} /> */}
+                  {/* chose with const items to display list of cafes App.js: line 100 */}
+                    {/* <FilterableItemList items={items} /> */}
 
-                </li>
-              </ul>
-            </div>
-        </nav>
+                  </li>
+                </ul>
+              </div>
+          </nav>
      
-        <MapContainer
-          center={center}
-          markers={this.state.venues}
-          actualMarker={this.state.actualMarker}
-          showingInfoWindow={this.state.showingInfoWindow}
-          //selectedPlace={this.state.selectedPlace}
-          selectedCafe={this.state.selectedCafe}
-          activeMarker={this.state.activeMarker}
- 
-        />
+          <MapContainer
+            center={center}
+            markers={this.state.venues}
+            //actualMarker={this.state.actualMarker}
+            showingInfoWindow={this.state.showingInfoWindow}
+            //selectedPlace={this.state.selectedPlace}
+            selectedCafe={this.state.selectedCafe}
+            activeMarker={this.state.activeMarker}
+            toggleBounce={this.state.toggleBounce} // ?
+          />
 
+          </div>
         </div>
-      </div>
+      </ErrorBoundary>
  
     );
   }
