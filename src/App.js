@@ -8,7 +8,7 @@ import './App.css';
 // import Marker from './components/marker';
 
 
-import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+//import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 import MapContainer from './components/Map';
 // import AsideMenu from "./components/AsideMenu";
 // import FilteredList from "./components/FilteredList";
@@ -25,23 +25,31 @@ const clientSecret = 'HPFMZTLH0BAGBWNVE3XA2ILS4Y1UKDG1VDN5CYFXIP0BVNNH';
 const version = '20180323';
 */
 
+/*
+// ADDING PHOTOS
+var foursquare = require('react-foursquare')({
+  clientID: 'BDM3LB3BNSQGZV4QL0WX4TD1K1LYIRTGERM4A3YONTPSFR2U',
+  clientSecret: 'HPFMZTLH0BAGBWNVE3XA2ILS4Y1UKDG1VDN5CYFXIP0BVNNH'
+});
+*/
+
 export class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-    // center: {},
-      showingInfoWindow: false,
-      activeMarker: {},
-      selectedPlace: {},
-      // selectedItems: null, //
       search: "",
-      // locations: [],
       venues: [],
-      items: [], //
-      selectedCafe: null,
       markers: [],
-      marker: [],
-   
+      // center: {},
+      //showingInfoWindow: false,
+      //activeMarker: {},
+      //selectedPlace: {},
+      // selectedItems: null, //
+      // locations: [],
+      //items: [], //
+      //selectedCafe: null,
+      
+      //marker: [],
     };
     this.filterItems = this.filterItems.bind(this);
     this.toggleBounce = this.toggleBounce.bind(this);
@@ -49,6 +57,7 @@ export class App extends Component {
 
   componentDidMount() {
     this.getCafes();
+    //this.fetchVenues();
   }
 
   filterItems(filter) {
@@ -64,7 +73,7 @@ export class App extends Component {
     this.setState({ venues });
   }
 
-  // ?? 
+/*  // ?? 
   handleOnCafeClick() {
     console.log('???!!!');
     let marker;
@@ -77,7 +86,7 @@ export class App extends Component {
       this.setState({ 
         markers: [] 
       });
-    }
+    }*/
 
   // ??
   toggleBounce() {
@@ -111,6 +120,39 @@ export class App extends Component {
       })
   }
 
+  /*
+  // ADDING PHOTOS
+  componentDidMount() {
+    this.fetchVenues();
+  }*/
+/*
+  // ADDING PHOTOS
+  fetchVenues = () => {
+    var params = {
+      "near": this.state.near,
+      "intent": 'browse',
+      "ll": "51.1079, 17.0385",
+      "query": 'Cafe'
+    };
+    foursquare.venues.recommendations(params)
+      .then(res => {
+        console.log(res)
+        this.setState({ 
+          items: res.response.group.results, 
+        });
+      })
+  }
+*/
+
+   /*
+  setQuery = event => {
+      this.setState({ query: event.target.value });
+  }
+  setLocation = event => {
+      this.setState({ near: event.target.value });
+  }
+  */
+
 /*
   selectCafe = (item) => {
     console.log(item);
@@ -129,7 +171,7 @@ export class App extends Component {
 
   render() {
 
-
+/*
     const location = {
       lat: 51.1079,
       lng: 17.0385
@@ -142,7 +184,7 @@ export class App extends Component {
           lng: 17.0385
         }
       }
-    ]
+    ]*/
 
     let center = {
       lat: 51.1079,
@@ -187,7 +229,7 @@ export class App extends Component {
                   {/* */}
                     {/* <FilterableItemList items={this.state.venues} /> */}
                 
-                    <FilterableItemList 
+                    <FilterableItemList
                       items={this.state.venues}
                       filterItems={this.filterItems}
                       
@@ -205,11 +247,13 @@ export class App extends Component {
             center={center}
             markers={this.state.venues}
             //actualMarker={this.state.actualMarker}
-            showingInfoWindow={this.state.showingInfoWindow}
+            // showingInfoWindow={this.state.showingInfoWindow}
             //selectedPlace={this.state.selectedPlace}
-            selectedCafe={this.state.selectedCafe}
-            activeMarker={this.state.activeMarker}
-            toggleBounce={this.state.toggleBounce} // ?
+            //selectedCafe={this.state.selectedCafe}
+            // activeMarker={this.state.activeMarker}
+            //toggleBounce={this.state.toggleBounce} // ?
+            //items={this.state.items}
+
           />
 
           </div>

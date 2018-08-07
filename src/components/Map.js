@@ -1,31 +1,26 @@
-import React, { Component } from 'react';
-import {Map, InfoWindow, Marker, GoogleApiWrapper, withScriptjs} from 'google-maps-react';
+import React from 'react';
+import {Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 
-// ADDING PHOTOS
-var foursquare = require('react-foursquare')({
-  clientID: 'BDM3LB3BNSQGZV4QL0WX4TD1K1LYIRTGERM4A3YONTPSFR2U',
-  clientSecret: 'HPFMZTLH0BAGBWNVE3XA2ILS4Y1UKDG1VDN5CYFXIP0BVNNH'
-});
 
 export class MapContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-    showingInfoWindow: false,
-    activeMarker: {},
-    selectedPlace: {},
-    selectedCafe: null, //
-    // markers: []
-    // venue: {}
+      showingInfoWindow: false,
+      activeMarker: {},
+      selectedPlace: {},
+      // selectedCafe: null, //
+      // markers: []
+      // venue: {}
 
-    // ADDING PHOTOS
-    items: [],
-    query: '',
-    near: 'Wroclaw, Poland',
-    // cafes: [],
-    // venues: [],
-    map: {},  
-    
+      // ADDING PHOTOS
+      // items: [],
+      // query: '',
+      // near: 'Wroclaw, Poland',
+      // cafes: [],
+      // venues: [],
+      // map: {},  
+      // google: {}
     };
     
   }
@@ -38,53 +33,22 @@ export class MapContainer extends React.Component {
   });
 
   onMapClicked = (props) => {
-    if (this.state.showingInfoWindow) {
+    if (this.showingInfoWindow) {
       this.setState({
         showingInfoWindow: false,
         activeMarker: null
       })
     }
   };
-/*
-  // ADDING PHOTOS
-  componentDidMount() {
-    this.fetchVenues();
-  }
-
-  // ADDING PHOTOS
-  fetchVenues = () => {
-    var params = {
-      "near": this.state.near,
-      "intent": 'browse',
-      "ll": "51.1079, 17.0385",
-      "query": 'Cafe'
-    };
-    foursquare.venues.recommendations(params)
-      .then(res => {
-        console.log(res)
-        this.setState({ 
-          items: res.response.group.results, 
-        });
-      })
-  }*/
-
-  /*
-  setQuery = event => {
-      this.setState({ query: event.target.value });
-  }
-  setLocation = event => {
-      this.setState({ near: event.target.value });
-  }
-  */
 
   render() {  
-    const { cafe, location, locations, actualMarker, filterLocations, google, map, onMarkerClick, activeMarker } = this.props;
+    const { google, map /*cafe,*/ /*location,*/ /*locations,*/ /*actualMarker,*/ /*filterLocations,*/ /*onMarkerClick,*/ /*activeMarker*/ } = this.props;
 
     const style = {
       width: '100%',
       height: '100%'
     }
-
+/*
     // 
     let center = {
       lat: 51.1079,
@@ -97,6 +61,7 @@ export class MapContainer extends React.Component {
         lng: this.state.selectedCafe.lng
       }
     }
+*/
 
     let classes = "marker";
     if (this.props.selected) {
@@ -123,13 +88,13 @@ export class MapContainer extends React.Component {
         name={venue.name}
         address={venue.location.address}
         onClick={this.onMarkerClick}
-        selectedPlace={venue === this.state.selectedPlace}
-        selected={venue.item === this.state.selectedCafe}
-        id={venue.id}
-        toggleBounce={this.toggleBounce} // ?
+        // selectedPlace={venue === this.state.selectedPlace}
+        // selected={venue.item === this.state.selectedCafe}
+        // id={venue.id}
+
 
         />
-      }
+      } 
     });
 
     return (
@@ -167,12 +132,13 @@ export class MapContainer extends React.Component {
               </div>
 
             {/*add photos - array ? */}
-            {/* 
-              this.state.items.map(item => {
+            {/*
+              this.props.items.forEach(item => {
                 if (item.photo) {
                   let venue_url = "https://foursquare.com/v/" + item.venue.id;
                   let photo_url = item.photo.prefix + '300x300' + item.photo.suffix;
                   return (
+                  <div>
                     <div key={item.venue.id}>
                       <a href={venue_url}>
                         <img src={photo_url} alt={this.state.selectedPlace.name} />
@@ -183,7 +149,8 @@ export class MapContainer extends React.Component {
                           <p>{this.state.selectedPlace.address}</p>
                       </div>
                     </div>
-                    )
+                  </div>
+                  )
                 }
               })
             */}
