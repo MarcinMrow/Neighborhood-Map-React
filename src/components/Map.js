@@ -11,27 +11,17 @@ export class MapContainer extends React.Component {
     };
     this.onMarkerClick = this.onMarkerClick.bind(this);
     this.onMapClicked = this.onMapClicked.bind(this);   
+
+
   }
 
-/*
-  // initial - before adding animation
-  onMarkerClick = (props, marker, e) =>
-    this.setState({
-      selectedPlace: props,
-      activeMarker: marker,
-      showingInfoWindow: true,     
-    });
-*/   
-  
 
-  onMarkerClick = (props, marker, e) => {
+  onMarkerClick = (props, marker, e) =>
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
       showingInfoWindow: true,
     });
-    this.props.toggleBounce(marker);
-  };
  
 
   onMapClicked = (props) => {
@@ -43,6 +33,8 @@ export class MapContainer extends React.Component {
     }
   };
 
+  
+
   render() {  
     const { google, map } = this.props;
 
@@ -50,6 +42,20 @@ export class MapContainer extends React.Component {
       width: '100%',
       height: '100%'
     }
+/*
+    // 
+    let center = {
+      lat: 51.1079,
+      lng: 17.0385
+    }
+
+    if (this.state.selectedCafe) {
+      center = {
+        lat: this.state.selectedCafe.lat,
+        lng: this.state.selectedCafe.lng
+      }
+    }
+*/
 
     let classes = "marker";
     if (this.props.selected) {
@@ -63,11 +69,11 @@ export class MapContainer extends React.Component {
           lng: venue.location.lng
         },
         map: map,
-        animation: google.maps.Animation.DROP,
+        //animation: google.maps.Animation.DROP,
       }
 
     if (venue.isVisible === undefined || venue.isVisible) {
-      console.log('venue is visible');
+      //console.log('venue is visible');
       return <Marker
         className={classes}
         aria-label="Marker of the cafe"

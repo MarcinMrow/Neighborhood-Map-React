@@ -28,9 +28,11 @@ export class App extends Component {
     this.state = {
       venues: [],
       markers: [],
+      marker: [],
     };
     this.filterItems = this.filterItems.bind(this);
-    this.toggleBounce = this.toggleBounce.bind(this); 
+    this.toggleBounce = this.toggleBounce.bind(this);
+    
   }
 
   componentDidMount() {
@@ -51,7 +53,6 @@ export class App extends Component {
     this.setState({ venues });
   }
 
-
   toggleBounce(marker) {
     console.log('bouncing?')
     let google = this.state;
@@ -61,6 +62,8 @@ export class App extends Component {
         marker.setAnimation(google.maps.Animation.BOUNCE);
       }
     };
+
+  
 
 
 /*  // ?? 
