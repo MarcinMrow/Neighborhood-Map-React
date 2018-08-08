@@ -24,6 +24,7 @@ export class MapContainer extends React.Component {
     };
     this.onMarkerClick = this.onMarkerClick.bind(this);
     this.onMapClicked = this.onMapClicked.bind(this);
+    
   }
 
   /* // initial - before adding animation
@@ -41,8 +42,8 @@ export class MapContainer extends React.Component {
       selectedPlace: props,
       activeMarker: marker,
       showingInfoWindow: true,     
-    });
-    this.toggleBounce(this.activeMarker); // adding animation ?
+    })
+    this.props.toggleBounce(marker); // adding animation ?
   };
     
 
@@ -102,7 +103,7 @@ export class MapContainer extends React.Component {
         name={venue.name}
         address={venue.location.address}
         onClick={this.onMarkerClick}
-        animation={this.activeMarker === venue.id && google.maps.Animation.DROP}
+        animation={this.activeMarker === venue.id && google.maps.Animation.DROP} // ?
         // selectedPlace={venue === this.state.selectedPlace}
         // selected={venue.item === this.state.selectedCafe}
 

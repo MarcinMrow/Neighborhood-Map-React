@@ -84,19 +84,19 @@ export class App extends Component {
         }
       });
       this.setState({ 
-        markers: [] 
+        // ??
       });
     }*/
 
   // adding animation ?? 
-  toggleBounce() {
+  toggleBounce(marker) {
     console.log('bouncing?')
     // let marker; // duplicated
     let google = this.state;
-    const marker = google.maps.Marker({  
+    /*const marker = google.maps.Marker({  
           animation: google.maps.Animation.DROP,
-        });   
-    //if (e.target.item.id === marker.name) {
+        });*/   
+    // if (e.target.item.id === marker.name) {
       if (marker.getAnimation() !== null) {
         marker.setAnimation(null);
       } else {
