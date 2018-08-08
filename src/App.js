@@ -29,6 +29,7 @@ export class App extends Component {
       venues: [],
       markers: [],
       marker: [],
+      selectedCafe: null,
     };
     this.filterItems = this.filterItems.bind(this);
     this.toggleBounce = this.toggleBounce.bind(this);
@@ -53,6 +54,8 @@ export class App extends Component {
     this.setState({ venues });
   }
 
+
+  // add animation
   toggleBounce(marker) {
     console.log('bouncing?')
     let google = this.state;
@@ -63,29 +66,13 @@ export class App extends Component {
       }
     };
 
-  
-
-
-/*  // ?? 
-  handleOnCafeClick() {
+  // ?? 
+  onClickMarkerChange() {
     console.log('???!!!');
-    let marker;
-    let venues = [...this.state.venues];
-      venues.forEach(item => {
-        if (item.target.id === marker.name) {
-        this.toggleBounce();  
-        }
-      });
-      this.setState({ 
-        // ??
-      });
-    }*/
-
-  // adding animation ?? 
-  
     
+  }
 
-  
+
 
   getCafes() {
     // console.log('componentDidMount')
@@ -130,30 +117,14 @@ export class App extends Component {
   }
 */
 
-   /*
-  setQuery = event => {
-      this.setState({ query: event.target.value });
-  }
-  setLocation = event => {
-      this.setState({ near: event.target.value });
-  }
-  */
-
-/*
-  selectCafe = (item) => {
+ /*selectCafe = (item) => {
     console.log(item);
     this.setState({
-      selectedCafe: item
-    })
-  }
+      selectedCafe: item,
+    });   
+  }*/
 
-  handleClick = () => {
-    // console.log('click on cafe')
-    // call the selectCafe
-    this.props.selectCafe(this.props.item);
-  }
-*/
-
+  
 
   render() {
 
@@ -176,10 +147,10 @@ export class App extends Component {
       lng: 17.0385
     }
 
-    if (this.props.activeMarker) {
+    if (this.state.selectedCafe) {
       center = {
-        lat: this.props.selectedPlace.lat,
-        lng: this.props.selectedPlace.lng
+        lat: this.state.selectedCafe.lat,
+        lng: this.state.selectedCafe.lng
       }
     }
 
@@ -203,6 +174,9 @@ export class App extends Component {
                     <FilterableItemList
                       items={this.state.venues}
                       filterItems={this.filterItems} 
+                      //selectCafe={this.state.selectCafe}
+                     
+
                     />
 
                   </li>
@@ -214,6 +188,8 @@ export class App extends Component {
             center={center}
             markers={this.state.venues}
             toggleBounce={this.toggleBounce}
+            //selectCafe={this.state.selectCafe}
+            handleClick={this.props.handleClick}
           />
 
           </div>

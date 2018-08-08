@@ -3,11 +3,11 @@ import Item from "./Item";
 
 class ItemList extends React.Component {
 
-  selectCafe = (item) => {
-    // console.log(item);
-    this.setState({
-      selectedCafe: item,
-    });   
+  handleClick = () => {
+    //console.log('click on cafe')
+    console.log('this is:', this)
+    // call the selectCafe
+    //this.props.selectCafe(this.props.item);
   }
 
   render() {
@@ -25,7 +25,8 @@ class ItemList extends React.Component {
         <Item
           item={item}
           key={item.id}
-          selectCafe={this.selectCafe}
+          selectCafe={this.props.selectCafe}
+          handleClick={this.handleClick}
         />
       );
      
