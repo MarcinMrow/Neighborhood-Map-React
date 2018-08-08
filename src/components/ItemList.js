@@ -27,6 +27,7 @@ class ItemList extends React.Component {
     const filterInput = this.props.filterInput;
    
     const rows = [];
+    // let filteredItems = [];
 
     this.props.items.forEach((item) => {
       if (item.name.toLowerCase().indexOf(filterInput.toLowerCase()) === -1) {

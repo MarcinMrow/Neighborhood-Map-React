@@ -11,6 +11,7 @@ class Item extends React.Component {
 
   render() {
     const title = this.props.item.name;
+
     /*const name = item.name;
       <span>
         {item.name}
@@ -21,7 +22,8 @@ class Item extends React.Component {
         // onClick={this.handleClick}
         onClick={(e) => this.handleClick(e)} // `this` is bound within handleClick
         role="button"
-        tabIndex={0}    
+        tabIndex={0}   
+        
         >
           <div className="cafe-title">
             {title}

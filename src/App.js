@@ -37,7 +37,7 @@ export class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      search: "",
+      //search: "",
       venues: [],
       markers: [],
       // center: {},
@@ -52,7 +52,7 @@ export class App extends Component {
       //marker: [],
     };
     this.filterItems = this.filterItems.bind(this);
-    this.toggleBounce = this.toggleBounce.bind(this);
+    //this.toggleBounce = this.toggleBounce.bind(this);
   }
 
   componentDidMount() {
@@ -92,14 +92,15 @@ export class App extends Component {
   toggleBounce() {
     console.log('bouncing?')
     let marker;
+    let google = this.state;
     //if (e.target.item.id === marker.name) {
       if (marker.getAnimation() !== null) {
         marker.setAnimation(null);
       } else {
-        marker.setAnimation(this.state.google.maps.Animation.BOUNCE);
+        marker.setAnimation(google.maps.Animation.BOUNCE);
       }
     }
-    //}
+  //}
 
   getCafes() {
     // console.log('componentDidMount')
@@ -191,10 +192,10 @@ export class App extends Component {
       lng: 17.0385
     }
 
-    if (this.state.selectedCafe) {
+    if (this.props.activeMarker) {
       center = {
-        lat: this.state.selectedCafe.lat,
-        lng: this.state.selectedCafe.lng
+        lat: this.props.selectedPlace.lat,
+        lng: this.props.selectedPlace.lng
       }
     }
 
@@ -232,6 +233,7 @@ export class App extends Component {
                     <FilterableItemList
                       items={this.state.venues}
                       filterItems={this.filterItems}
+                      //activeMarker={this.props.activeMarker}
                       
                     />
 
@@ -250,7 +252,7 @@ export class App extends Component {
             // showingInfoWindow={this.state.showingInfoWindow}
             //selectedPlace={this.state.selectedPlace}
             //selectedCafe={this.state.selectedCafe}
-            // activeMarker={this.state.activeMarker}
+            //activeMarker={this.props.activeMarker}
             //toggleBounce={this.state.toggleBounce} // ?
             //items={this.state.items}
 
