@@ -26,12 +26,25 @@ export class MapContainer extends React.Component {
     this.onMapClicked = this.onMapClicked.bind(this);
   }
 
+  /* // initial - before adding animation
   onMarkerClick = (props, marker, e) =>
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
-      showingInfoWindow: true,
-  });
+      showingInfoWindow: true,     
+    });
+    
+  */
+
+  onMarkerClick = (props, marker, e) => {
+    this.setState({
+      selectedPlace: props,
+      activeMarker: marker,
+      showingInfoWindow: true,     
+    });
+    this.toggleBounce(this.activeMarker); // adding animation ?
+  };
+    
 
   onMapClicked = (props) => {
     if (this.showingInfoWindow) {
@@ -76,7 +89,7 @@ export class MapContainer extends React.Component {
           lng: venue.location.lng
         },
         map: map,
-        //animation: google.maps.Animation.DROP, // ?
+        animation: google.maps.Animation.DROP, // ?
       }
 
     if (venue.isVisible === undefined || venue.isVisible) {
@@ -89,11 +102,9 @@ export class MapContainer extends React.Component {
         name={venue.name}
         address={venue.location.address}
         onClick={this.onMarkerClick}
-        animation={this.activeMarker === venue.i && google.maps.Animation.DROP}
+        animation={this.activeMarker === venue.id && google.maps.Animation.DROP}
         // selectedPlace={venue === this.state.selectedPlace}
         // selected={venue.item === this.state.selectedCafe}
-        // id={venue.id}
-
 
         />
       } 

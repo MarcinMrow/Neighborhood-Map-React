@@ -52,7 +52,7 @@ export class App extends Component {
       //marker: [],
     };
     this.filterItems = this.filterItems.bind(this);
-    //this.toggleBounce = this.toggleBounce.bind(this);
+    this.toggleBounce = this.toggleBounce.bind(this);
   }
 
   componentDidMount() {
@@ -88,11 +88,14 @@ export class App extends Component {
       });
     }*/
 
-  // ??
+  // adding animation ?? 
   toggleBounce() {
     console.log('bouncing?')
-    let marker;
+    // let marker; // duplicated
     let google = this.state;
+    const marker = google.maps.Marker({  
+          animation: google.maps.Animation.DROP,
+        });   
     //if (e.target.item.id === marker.name) {
       if (marker.getAnimation() !== null) {
         marker.setAnimation(null);
