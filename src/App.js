@@ -1,18 +1,7 @@
 import React, { Component } from 'react';
-//import GoogleMapReact from 'google-map-react';
-// import $ from 'jquery';
-//import { Fetch } from 'react-request';
-// import logo from './logo.svg';
 import './App.css';
-//import Cafe from './components/cafe';
-// import Marker from './components/marker';
-
-
 //import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 import MapContainer from './components/Map';
-// import AsideMenu from "./components/AsideMenu";
-// import FilteredList from "./components/FilteredList";
-// import List from "./components/List";
 import superagent from 'superagent';
 import FilterableItemList from './components/FilterableItemList';
 import ErrorBoundary from './components/ErrorBoundary';
@@ -37,22 +26,11 @@ export class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      //search: "",
       venues: [],
       markers: [],
-      // center: {},
-      //showingInfoWindow: false,
-      //activeMarker: {},
-      //selectedPlace: {},
-      // selectedItems: null, //
-      // locations: [],
-      //items: [], //
-      //selectedCafe: null,
-      
-      //marker: [],
     };
     this.filterItems = this.filterItems.bind(this);
-    this.toggleBounce = this.toggleBounce.bind(this);
+    this.toggleBounce = this.toggleBounce.bind(this); 
   }
 
   componentDidMount() {
@@ -73,6 +51,18 @@ export class App extends Component {
     this.setState({ venues });
   }
 
+
+  toggleBounce(marker) {
+    console.log('bouncing?')
+    let google = this.state;
+      if (marker.getAnimation() !== null) {
+        marker.setAnimation(null);
+      } else {
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+      }
+    };
+
+
 /*  // ?? 
   handleOnCafeClick() {
     console.log('???!!!');
@@ -89,21 +79,10 @@ export class App extends Component {
     }*/
 
   // adding animation ?? 
-  toggleBounce(marker) {
-    console.log('bouncing?')
-    // let marker; // duplicated
-    let google = this.state;
-    /*const marker = google.maps.Marker({  
-          animation: google.maps.Animation.DROP,
-        });*/   
-    // if (e.target.item.id === marker.name) {
-      if (marker.getAnimation() !== null) {
-        marker.setAnimation(null);
-      } else {
-        marker.setAnimation(google.maps.Animation.BOUNCE);
-      }
-    }
-  //}
+  
+    
+
+  
 
   getCafes() {
     // console.log('componentDidMount')
@@ -119,7 +98,7 @@ export class App extends Component {
         //console.log(venues)
         this.setState({
           venues: venues,
-          // selectedPlace: venues
+          //selectedPlace: venues
         })
       })
   }
@@ -175,7 +154,6 @@ export class App extends Component {
 
   render() {
 
-/*
     const location = {
       lat: 51.1079,
       lng: 17.0385
@@ -188,7 +166,7 @@ export class App extends Component {
           lng: 17.0385
         }
       }
-    ]*/
+    ]
 
     let center = {
       lat: 51.1079,
@@ -202,17 +180,6 @@ export class App extends Component {
       }
     }
 
-    // array used with line:120
-    /*const items = [
-      {name: 'Nero'},
-      {name: 'Costa'},
-      {name: 'Cherubinowy'},
-      {name: 'Targowa'},
-      {name: 'Vinyl'},
-      {name: 'Rozrusznik'}
-    ];*/
-
-
     return (
       <ErrorBoundary>
 
@@ -221,7 +188,7 @@ export class App extends Component {
           
           {/*add slider nav*/}
           <nav className="menu-container">
-            <a href="menu" className="menu-btn">
+            <a href="#" className="menu-btn" tabIndex={0}>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <path d="M2 6h20v3H2zm0 5h20v3H2zm0 5h20v3H2z"></path>
               </svg>
@@ -230,18 +197,10 @@ export class App extends Component {
                 <ul className="menu-list">
                   <li className="menu-item">
 
-                  {/* */}
-                    {/* <FilterableItemList items={this.state.venues} /> */}
-                
                     <FilterableItemList
                       items={this.state.venues}
-                      filterItems={this.filterItems}
-                      //activeMarker={this.props.activeMarker}
-                      
+                      filterItems={this.filterItems} 
                     />
-
-                  {/* chose with const items to display list of cafes App.js: line 100 */}
-                    {/* <FilterableItemList items={items} /> */}
 
                   </li>
                 </ul>
@@ -251,14 +210,7 @@ export class App extends Component {
           <MapContainer
             center={center}
             markers={this.state.venues}
-            //actualMarker={this.state.actualMarker}
-            // showingInfoWindow={this.state.showingInfoWindow}
-            //selectedPlace={this.state.selectedPlace}
-            //selectedCafe={this.state.selectedCafe}
-            //activeMarker={this.props.activeMarker}
-            //toggleBounce={this.state.toggleBounce} // ?
-            //items={this.state.items}
-
+            toggleBounce={this.toggleBounce}
           />
 
           </div>

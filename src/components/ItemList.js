@@ -2,20 +2,7 @@ import React from "react";
 import Item from "./Item";
 
 class ItemList extends React.Component {
-  /*
-  //
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedCafe: null,
-    };
-    
-    this.selectCafe = this.selectCafe.bind(this); //
-  }
-  */
 
-  
-  //
   selectCafe = (item) => {
     // console.log(item);
     this.setState({
@@ -38,7 +25,7 @@ class ItemList extends React.Component {
         <Item
           item={item}
           key={item.id}
-          selectCafe={this.selectCafe} // ?
+          selectCafe={this.selectCafe}
         />
       );
      

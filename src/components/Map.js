@@ -1,7 +1,6 @@
 import React from 'react';
 import {Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 
-
 export class MapContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -9,43 +8,31 @@ export class MapContainer extends React.Component {
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {},
-      // selectedCafe: null, //
-      // markers: []
-      // venue: {}
-
-      // ADDING PHOTOS
-      // items: [],
-      // query: '',
-      // near: 'Wroclaw, Poland',
-      // cafes: [],
-      // venues: [],
-      // map: {},  
-      // google: {}
     };
     this.onMarkerClick = this.onMarkerClick.bind(this);
-    this.onMapClicked = this.onMapClicked.bind(this);
-    
+    this.onMapClicked = this.onMapClicked.bind(this);   
   }
 
-  /* // initial - before adding animation
+/*
+  // initial - before adding animation
   onMarkerClick = (props, marker, e) =>
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
       showingInfoWindow: true,     
     });
-    
-  */
+*/   
+  
 
   onMarkerClick = (props, marker, e) => {
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
-      showingInfoWindow: true,     
-    })
-    this.props.toggleBounce(marker); // adding animation ?
+      showingInfoWindow: true,
+    });
+    this.props.toggleBounce(marker);
   };
-    
+ 
 
   onMapClicked = (props) => {
     if (this.showingInfoWindow) {
@@ -57,26 +44,12 @@ export class MapContainer extends React.Component {
   };
 
   render() {  
-    const { google, map /*cafe,*/ /*location,*/ /*locations,*/ /*actualMarker,*/ /*filterLocations,*/ /*onMarkerClick,*/ /*activeMarker*/ } = this.props;
+    const { google, map } = this.props;
 
     const style = {
       width: '100%',
       height: '100%'
     }
-/*
-    // 
-    let center = {
-      lat: 51.1079,
-      lng: 17.0385
-    }
-
-    if (this.state.selectedCafe) {
-      center = {
-        lat: this.state.selectedCafe.lat,
-        lng: this.state.selectedCafe.lng
-      }
-    }
-*/
 
     let classes = "marker";
     if (this.props.selected) {
@@ -90,23 +63,19 @@ export class MapContainer extends React.Component {
           lng: venue.location.lng
         },
         map: map,
-        animation: google.maps.Animation.DROP, // ?
+        animation: google.maps.Animation.DROP,
       }
 
     if (venue.isVisible === undefined || venue.isVisible) {
-      // console.log('venue is visible');
+      console.log('venue is visible');
       return <Marker
         className={classes}
-        aria-label="Marker of the cafe" //
+        aria-label="Marker of the cafe"
         key={i} 
         {...marker}
         name={venue.name}
         address={venue.location.address}
-        onClick={this.onMarkerClick}
-        animation={this.activeMarker === venue.id && google.maps.Animation.DROP} // ?
-        // selectedPlace={venue === this.state.selectedPlace}
-        // selected={venue.item === this.state.selectedCafe}
-
+        onClick={this.onMarkerClick}   
         />
       } 
     });
@@ -114,9 +83,9 @@ export class MapContainer extends React.Component {
     return (
       <div className="map-container" role="application">
         <Map 
-          aria-label="location"  //
-          role="application" // 
-          // cafe={this.props.cafe}
+          aria-label="location" 
+          role="application" 
+          cafe={this.props.cafe}
           google={this.props.google} 
           zoom={13}
           initialCenter={{
@@ -176,7 +145,7 @@ export class MapContainer extends React.Component {
     );
   }
 }
- 
+
 export default GoogleApiWrapper({
   apiKey: ('AIzaSyCZgCuxKRu85jYhwg4H9JNCYKl7URtbU8w')
 })(MapContainer)

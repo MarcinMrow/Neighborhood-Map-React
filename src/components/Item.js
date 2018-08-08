@@ -12,15 +12,11 @@ class Item extends React.Component {
   render() {
     const title = this.props.item.name;
 
-    /*const name = item.name;
-      <span>
-        {item.name}
-      </span>;*/
-  
     return (
       <div className="cafe"
         // onClick={this.handleClick}
-        onClick={(e) => this.handleClick(e)} // `this` is bound within handleClick
+        // `this` is bound within handleClick
+        onClick={(e) => this.handleClick(e)} 
         role="button"
         tabIndex={0}   
         
