@@ -21,7 +21,7 @@
 4. **Map and Markers** - map displays all location markers by default and displays the filtered subset of location markers when a filter is applied. Click a marker to display information about a location in an info window.
 5. Foursquare's API is used to provide information. Click [here](https://developer.foursquare.com/) to get more information.
 
-## Getting started ??
+## Getting started
 
 1. Download/ clone the repository 
 ```
@@ -45,7 +45,8 @@ Project Instructions [rubric](https://review.udacity.com/#!/rubrics/1351/view).
 4. **Style Guidelines**: [Udacity Frontend Nanodegree Style Guide](http://udacity.github.io/frontend-nanodegree-styleguide/index.html).
 5. **Udacity Community**: [Forums](https://discussions.udacity.com/) and [Knowledge](https://knowledge.udacity.com/) and [Slack](https://slack.com/).
 6. **Web Fundamentals**: [guide](https://developers.google.com/web/fundamentals/).
-
+7. **Google Maps Platform**: [Documentation](https://developers.google.com/maps/documentation/).
+8. **Foursquare**: [Foursquare Developers](https://developer.foursquare.com/).
 
 ## Create React App 
 
