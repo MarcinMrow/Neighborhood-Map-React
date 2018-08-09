@@ -15,13 +15,11 @@ class SearchInput extends React.Component {
     return (
       <div className="search">
         <input
-          /*
-          role="searchbox" //
-          tabIndex="0" //
-          aria-label="Search your cafe" //
-          */
+          role="searchbox"
+          aria-label="input filter"
+          tabIndex={0}
           type="text"
-          placeholder="Search your cafe..."
+          placeholder=" Search your cafe..."
           value={this.props.filterInput}
           onChange={this.handleTextChange}
         />

@@ -10,20 +10,17 @@ export class MapContainer extends React.Component {
       selectedPlace: {},
     };
     this.onMarkerClick = this.onMarkerClick.bind(this);
-    this.onMapClicked = this.onMapClicked.bind(this);   
-
-
+    this.onMapClicked = this.onMapClicked.bind(this);
   }
 
-
-  onMarkerClick = (props, marker, e) =>
+  // Open InfoWindow when marker is clicked
+  onMarkerClick = (props, marker, e) => 
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
       showingInfoWindow: true,
     });
- 
-
+  
   onMapClicked = (props) => {
     if (this.showingInfoWindow) {
       this.setState({
@@ -33,8 +30,6 @@ export class MapContainer extends React.Component {
     }
   };
 
-  
-
   render() {  
     const { google, map } = this.props;
 
@@ -42,26 +37,13 @@ export class MapContainer extends React.Component {
       width: '100%',
       height: '100%'
     }
-/*
-    // 
-    let center = {
-      lat: 51.1079,
-      lng: 17.0385
-    }
-
-    if (this.state.selectedCafe) {
-      center = {
-        lat: this.state.selectedCafe.lat,
-        lng: this.state.selectedCafe.lng
-      }
-    }
-*/
 
     let classes = "marker";
     if (this.props.selected) {
       classes += " selected";
     }
 
+    /* Create the marker */
     const markers = this.props.markers.map((venue, i) => {
       const marker = {
         position: {
@@ -69,7 +51,7 @@ export class MapContainer extends React.Component {
           lng: venue.location.lng
         },
         map: map,
-        //animation: google.maps.Animation.DROP,
+        animation: venue.selected ? google.maps.Animation.BOUNCE : null,
       }
 
     if (venue.isVisible === undefined || venue.isVisible) {
@@ -84,11 +66,13 @@ export class MapContainer extends React.Component {
         onClick={this.onMarkerClick}
         selected={venue.id === this.props.selectedCafe}  
         />
-      } 
+      } else {
+        return false;
+      }
     });
 
     return (
-      <div className="map-container" role="application">
+      <div>
         <Map 
           aria-label="location" 
           role="application" 
@@ -101,7 +85,6 @@ export class MapContainer extends React.Component {
           }}
           onClick={this.onMapClicked}
           style={style} 
-
         >
 
           {/*display markers on the map*/}
@@ -113,17 +96,17 @@ export class MapContainer extends React.Component {
             onClose={this.onInfoWindowClose}
             marker={this.state.activeMarker}
             visible={this.state.showingInfoWindow}
-            >
+          >
           
-              <div className="info-window" tabIndex={0} aria-label="Info window">
-                <h2>{this.state.selectedPlace.name}</h2>
-                <h3>Address: </h3>
-                  <p>{this.state.selectedPlace.address}</p>
-              </div>
+            <div className="info-window" tabIndex={0} aria-label="Info window">
+              <h2>{this.state.selectedPlace.name}</h2>
+              <h3>Address: </h3>
+                <p>{this.state.selectedPlace.address}</p>
+            </div>
 
             {/*add photos - array ? */}
             {/*
-              this.props.items.forEach(item => {
+              this.props.items.map(item => {
                 if (item.photo) {
                   let venue_url = "https://foursquare.com/v/" + item.venue.id;
                   let photo_url = item.photo.prefix + '300x300' + item.photo.suffix;

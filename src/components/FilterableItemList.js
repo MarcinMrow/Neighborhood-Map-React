@@ -21,7 +21,7 @@ class FilterableItemList extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="nav-list">
         <SearchInput
           filterInput={this.state.filterInput}
           onFilterTextChange={this.handleTextChange}
@@ -29,6 +29,7 @@ class FilterableItemList extends React.Component {
         <ItemList
           items={this.props.items}
           filterInput={this.state.filterInput}
+          itemClicked={this.props.itemClicked}
         />
       </div>
     );
