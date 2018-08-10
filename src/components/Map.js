@@ -104,30 +104,6 @@ export class MapContainer extends React.Component {
                 <p>{this.state.selectedPlace.address}</p>
             </div>
 
-            {/*add photos - array ? */}
-            {/*
-              this.props.items.map(item => {
-                if (item.photo) {
-                  let venue_url = "https://foursquare.com/v/" + item.venue.id;
-                  let photo_url = item.photo.prefix + '300x300' + item.photo.suffix;
-                  return (
-                  <div>
-                    <div key={item.venue.id}>
-                      <a href={venue_url}>
-                        <img src={photo_url} alt={this.state.selectedPlace.name} />
-                      </a>  
-                      <div>
-                        <h2>{this.state.selectedPlace.name}</h2>
-                        <h3>Address: </h3>
-                          <p>{this.state.selectedPlace.address}</p>
-                      </div>
-                    </div>
-                  </div>
-                  )
-                }
-              })
-            */}
-
           </InfoWindow>
         
         </Map>

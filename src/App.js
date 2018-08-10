@@ -6,14 +6,6 @@ import superagent from 'superagent';
 import FilterableItemList from './components/FilterableItemList';
 import ErrorBoundary from './components/ErrorBoundary';
 
-/*
-// ADDING PHOTOS
-var foursquare = require('react-foursquare')({
-  clientID: 'BDM3LB3BNSQGZV4QL0WX4TD1K1LYIRTGERM4A3YONTPSFR2U',
-  clientSecret: 'HPFMZTLH0BAGBWNVE3XA2ILS4Y1UKDG1VDN5CYFXIP0BVNNH'
-});
-*/
-
 export class App extends Component {
   constructor(props) {
     super(props);
@@ -45,6 +37,9 @@ export class App extends Component {
       marker.setAnimation(null);
     } else {
       marker.setAnimation(google.maps.Animation.BOUNCE);
+      setTimeout(function() {
+        marker.setAnimation(null);
+      }, 2100);
     }
   };
 
@@ -71,6 +66,7 @@ export class App extends Component {
       if (item.id === itemID) {
         if (item.selected === undefined) {
           item.selected = true;
+
         } else {
           item.selected = !item.selected;
         }
@@ -99,24 +95,7 @@ export class App extends Component {
       })
   }
 
-/*
-  // ADDING PHOTOS
-  fetchVenues = () => {
-    var params = {
-      "near": this.state.near,
-      "intent": 'browse',
-      "ll": "51.1079, 17.0385",
-      "query": 'Cafe'
-    };
-    foursquare.venues.recommendations(params)
-      .then(res => {
-        console.log(res)
-        this.setState({ 
-          items: res.response.group.results, 
-        });
-      })
-  }
-*/
+
   // handle click on the hamburger menu and opens menu container
   handleClickMenu(e) {
     e.preventDefault();
