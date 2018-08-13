@@ -73,6 +73,7 @@ export class MapContainer extends React.Component {
 
     return (
       <div>
+        
         <Map 
           aria-label="location" 
           role="application" 
@@ -86,6 +87,7 @@ export class MapContainer extends React.Component {
           onClick={this.onMapClicked}
           style={style} 
         >
+
 
           {/*display markers on the map*/}
           {markers}
@@ -107,6 +109,7 @@ export class MapContainer extends React.Component {
           </InfoWindow>
         
         </Map>
+  
       </div>
     );
   }

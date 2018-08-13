@@ -23,15 +23,23 @@
 
 ## Getting started
 
-1. Download/ clone the repository 
+1. Development Mode:
+
+a) Download/ clone the repository 
 ```
 $ git clone https://github.com/MarcinMrow/Neighborhood-Map-React.git
 ```
-2. Open the project directory.
+b) Open the project directory and follow next steps:
 
 * install all project dependencies with `npm install`
 * start the development server with `npm start`
 * with your server running, visit the site: `http://localhost:3000`
+
+2. Production Build:
+
+NOTE: the service worker does not work in the development mode. It can only work in the production mode.
+
+To open the app in the production build run: `npm run build`
 
 ## Instructions
 

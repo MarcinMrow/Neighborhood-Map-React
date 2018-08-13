@@ -15,7 +15,7 @@ export class App extends Component {
       marker: [],
       selectedCafe: null,
       //
-      isToggleOn: true
+      isToggleOn: true,
     };
     this.filterItems = this.filterItems.bind(this);
     this.toggleBounce = this.toggleBounce.bind(this);
@@ -66,7 +66,6 @@ export class App extends Component {
       if (item.id === itemID) {
         if (item.selected === undefined) {
           item.selected = true;
-
         } else {
           item.selected = !item.selected;
         }
@@ -86,12 +85,16 @@ export class App extends Component {
       .query(null)
       .set('Accept', 'text/json')
       .end((error, response) => {
+        // error handling
+        if (error) {
+          return alert('oh no! something went wrong ' + error);    
+        }
         const venues = response.body.response.venues
         // console.log(JSON.stringify(venues))
         //console.log(venues)
         this.setState({
           venues: venues,
-        })
+        });
       })
   }
 
@@ -155,12 +158,15 @@ export class App extends Component {
           </nav>
 
           <div className="map-container">
+
             <MapContainer
+              role="application"
               center={center}
               markers={this.state.venues}
               toggleBounce={this.toggleBounce}
               handleClick={this.props.handleClick}
             />
+          
           </div>
 
         </div>
@@ -170,3 +176,4 @@ export class App extends Component {
 }
  
 export default App;
+
