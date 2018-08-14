@@ -56,10 +56,11 @@ export class App extends Component {
       }
       item.isVisible = true;
     });
-    this.setState({ venues });
+    this.setState({ 
+      venues
+    });
   }
-
-  
+ 
   itemClicked(itemID) {
     console.log(itemID);
     // search all venues for selected one and set flag to bounce
@@ -158,6 +159,8 @@ export class App extends Component {
               items={this.state.venues}
               filterItems={this.filterItems}
               itemClicked={this.itemClicked}
+              marker={this.state.activeMarker}
+              visible={this.state.showingInfoWindow}
             /> 
           </nav>
 

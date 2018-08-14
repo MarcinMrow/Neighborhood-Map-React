@@ -29,7 +29,7 @@ a) Download/ clone the repository
 ```
 $ git clone https://github.com/MarcinMrow/Neighborhood-Map-React.git
 ```
-b) Open the project directory and follow next steps:
+b) Open the project directory and follow in steps:
 
 * install all project dependencies with `npm install`
 * start the development server with `npm start`
