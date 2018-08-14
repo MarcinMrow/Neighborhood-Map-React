@@ -30,6 +30,15 @@ export class MapContainer extends React.Component {
     }
   };
 
+  // Google Maps API > handling error > visible information for the user 
+  gm_authFailure() {
+    window.alert("Oh no! It's a Google Maps error! Plase try again or come back later.")
+  }
+  
+  componentDidMount() {
+    window.gm_authFailure = this.gm_authFailure;
+  }
+
   render() {  
     const { google, map } = this.props;
 

@@ -16,6 +16,8 @@ export class App extends Component {
       selectedCafe: null,
       //
       isToggleOn: true,
+      //
+      showingInfoWindow: false
     };
     this.filterItems = this.filterItems.bind(this);
     this.toggleBounce = this.toggleBounce.bind(this);
@@ -71,7 +73,9 @@ export class App extends Component {
         }
         return;
       }
-      this.setState({ venues });
+      this.setState({ 
+        venues,
+      });
     });
   }
 
