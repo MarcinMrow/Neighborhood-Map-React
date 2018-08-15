@@ -16,8 +16,6 @@ export class App extends Component {
       selectedCafe: null,
       //
       isToggleOn: true,
-      //
-      showingInfoWindow: false
     };
     this.filterItems = this.filterItems.bind(this);
     this.toggleBounce = this.toggleBounce.bind(this);
@@ -159,8 +157,6 @@ export class App extends Component {
               items={this.state.venues}
               filterItems={this.filterItems}
               itemClicked={this.itemClicked}
-              marker={this.state.activeMarker}
-              visible={this.state.showingInfoWindow}
             /> 
           </nav>
 

@@ -14,7 +14,7 @@ class Item extends React.Component {
       <div className="cafe"
         onClick={this.bounceMarker.bind(this, this.props.item)}
         role="button"
-        tabIndex={0}   
+        tabIndex={0}
         >
           <div className="cafe-title">
             {title}

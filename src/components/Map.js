@@ -32,7 +32,7 @@ export class MapContainer extends React.Component {
 
   // Google Maps API > handling error > visible information for the user 
   gm_authFailure() {
-    window.alert("Oh no! It's a Google Maps error! Plase try again or come back later.")
+    window.alert("Oh no! It's a Google Maps error! Please try again or come back later.")
   }
   
   componentDidMount() {
@@ -96,7 +96,6 @@ export class MapContainer extends React.Component {
           onClick={this.onMapClicked}
           style={style} 
         >
-
 
           {/*display markers on the map*/}
           {markers}

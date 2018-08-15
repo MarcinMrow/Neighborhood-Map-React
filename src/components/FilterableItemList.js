@@ -30,6 +30,8 @@ class FilterableItemList extends React.Component {
           items={this.props.items}
           filterInput={this.state.filterInput}
           itemClicked={this.props.itemClicked}
+          //
+          onMarkerClick={this.onMarkerClick}
         />
       </div>
     );
