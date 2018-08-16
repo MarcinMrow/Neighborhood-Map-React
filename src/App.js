@@ -14,13 +14,13 @@ export class App extends Component {
       markers: [],
       marker: [],
       selectedCafe: null,
-      //
+      // hamburger icon
       isToggleOn: true,
     };
     this.filterItems = this.filterItems.bind(this);
     this.toggleBounce = this.toggleBounce.bind(this);
     this.itemClicked = this.itemClicked.bind(this);
-    //
+    // open/ close cafe list
     this.handleClickMenu = this.handleClickMenu.bind(this);
   }
 
@@ -63,6 +63,8 @@ export class App extends Component {
     console.log(itemID);
     // search all venues for selected one and set flag to bounce
     let venues = [...this.state.venues];
+    let name, address;
+    let mapCon = this.child;
     venues.forEach((item) => {
       if (item.id === itemID) {
         if (item.selected === undefined) {
@@ -70,6 +72,25 @@ export class App extends Component {
         } else {
           item.selected = !item.selected;
         }
+        name = item.name;
+        address = item.location.address;
+        // find correct marker
+        let markerToShow;
+        mapCon.MarkersArr.forEach((marker) => {
+          if (marker.marker.name === item.name) {
+            markerToShow = marker.marker;
+            return;
+          }
+        });
+        let mapContainerState = {
+          selectedPlace: {
+            name: name,
+            address: address
+          },
+          activeMarker: markerToShow,
+          showingInfoWindow: item.selected
+        };
+        mapCon.onMarkerClick(mapContainerState.selectedPlace, mapContainerState.activeMarker);
         return;
       }
       this.setState({ 
@@ -161,15 +182,14 @@ export class App extends Component {
           </nav>
 
           <div className="map-container">
-
             <MapContainer
               role="application"
               center={center}
               markers={this.state.venues}
-              toggleBounce={this.toggleBounce}
+              // toggleBounce={this.toggleBounce}
               handleClick={this.props.handleClick}
-            />
-          
+              onRef={ref => (this.child = ref)}
+            />          
           </div>
 
         </div>
@@ -179,4 +199,3 @@ export class App extends Component {
 }
  
 export default App;
-

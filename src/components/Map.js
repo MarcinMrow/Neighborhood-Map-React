@@ -11,6 +11,7 @@ export class MapContainer extends React.Component {
     };
     this.onMarkerClick = this.onMarkerClick.bind(this);
     this.onMapClicked = this.onMapClicked.bind(this);
+    this.MarkersArr = [];
   }
 
   // Open InfoWindow when marker is clicked
@@ -37,7 +38,16 @@ export class MapContainer extends React.Component {
   
   componentDidMount() {
     window.gm_authFailure = this.gm_authFailure;
+    this.props.onRef(this);
   }
+
+  componentWillUnmount() {
+    this.props.onRef(undefined)
+  }
+
+  setMarkerRef = element => {
+    this.MarkersArr.push(element);
+  };
 
   render() {  
     const { google, map } = this.props;
@@ -73,7 +83,8 @@ export class MapContainer extends React.Component {
         name={venue.name}
         address={venue.location.address}
         onClick={this.onMarkerClick}
-        selected={venue.id === this.props.selectedCafe}  
+        selected={venue.id === this.props.selectedCafe}
+        ref={this.setMarkerRef}  
         />
       } else {
         return false;
