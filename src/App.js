@@ -61,7 +61,7 @@ export class App extends Component {
  
   itemClicked(itemID) {
     console.log(itemID);
-    // search all venues for selected one and set flag to bounce
+    // search all venues for selected one and set marker to bounce
     let venues = [...this.state.venues];
     let name, address;
     let mapCon = this.child;
@@ -72,13 +72,13 @@ export class App extends Component {
         } else {
           item.selected = !item.selected;
         }
+        // find correct marker
         name = item.name;
         address = item.location.address;
-        // find correct marker
-        let markerToShow;
+        let markerInfo;
         mapCon.MarkersArr.forEach((marker) => {
-          if (marker.marker.name === item.name) {
-            markerToShow = marker.marker;
+          if (marker && marker.marker.name === item.name) {
+            markerInfo = marker.marker;
             return;
           }
         });
@@ -87,7 +87,7 @@ export class App extends Component {
             name: name,
             address: address
           },
-          activeMarker: markerToShow,
+          activeMarker: markerInfo,
           showingInfoWindow: item.selected
         };
         mapCon.onMarkerClick(mapContainerState.selectedPlace, mapContainerState.activeMarker);
@@ -186,7 +186,7 @@ export class App extends Component {
               role="application"
               center={center}
               markers={this.state.venues}
-              // toggleBounce={this.toggleBounce}
+              toggleBounce={this.toggleBounce}
               handleClick={this.props.handleClick}
               onRef={ref => (this.child = ref)}
             />          
