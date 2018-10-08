@@ -21,6 +21,10 @@
 4. **Map and Markers** - map displays all location markers by default and displays the filtered subset of location markers when a filter is applied. Click a marker to display information about a location in an info window.
 5. Foursquare's API is used to provide information. Click [here](https://developer.foursquare.com/) to get more information.
 
+## Visit a Web App
+
+[Click here](https://marcinmrow.github.io/Neighborhood-Map-React/).
+
 ## Getting started
 
 1. Development Mode:
