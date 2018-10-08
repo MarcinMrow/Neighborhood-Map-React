@@ -85,7 +85,7 @@ export class MapContainer extends React.Component {
         address={venue.location.address}
         onClick={this.onMarkerClick}
         selected={venue.id === this.props.selectedCafe}
-        ref={this.setMarkerRef} 
+        ref={this.setMarkerRef}
         />
       } else {
         return false;
